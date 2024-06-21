@@ -1,0 +1,64 @@
+extends ../component/admin/layout
+
+//- Include necessary components
+include ../component/home__card-chart
+include ../component/home__card-indicator
+include ../component/home_about_cards
+
+block append head
+  link(rel="stylesheet", href="/stylesheets/lib/flickity.min.css")
+  link(rel="stylesheet", href="/stylesheets/home/home.css")
+  link(rel="stylesheet", href="/stylesheets/home/home-carousel.css")
+  link(rel="stylesheet", href="/stylesheets/home/card.css")
+  link(rel="stylesheet", href="/stylesheets/home/home-about.css")
+  script(src='/lib/d3v5/d3.min.js' type="text/javascript" defer)
+  script(src="/lib/flickity.pkgd.min.js" type="text/javascript" defer)
+  script(src="https://unpkg.com/set-interval-async" type="text/javascript" defer)
+  script(src='javascripts/home/card_time.js' type="text/javascript" defer)
+  script(src='javascripts/home/card_weather_current.js' type="text/javascript" defer)
+  script(src='javascripts/home/about_regions.js' type="module")
+
+block content
+  .admin-panel
+    //- Main content area
+    main.panel-content
+      #home-page  
+        .colour-banner 
+        #hero 
+          #hero-grid
+            #hero-title
+              #hero-title__text--top CORK
+              #hero-title__text--bottom DASHBOARD
+            #hero-time-weather
+              #hero-time
+                #hero-time__box  
+                  #hero-time__clock  
+                  #hero-time__date
+              #hero-weather
+                include ../home/hero__card-weather
+                  +home__card-chart({
+                    title: 'Unemployment rate (%)',
+                    subtitle: 'Southern region',
+                    id: 'unemployment-card',
+                    info: 'The unemployment rate for the Southern region declined from the highs experienced following the financial crisis of 2008. Since 2012 it has decreased by about 12%',
+                    buttons: [
+                      {
+                        href: '/themes#employment',
+                        name: 'More in THEMES'
+                      }
+                    ],
+                    plotoptions: {
+                      chartid: 'unemployment-card__chart',
+                      data: {
+                        href: '../data/static/QLF08.json',
+                      },
+                      src: '/javascripts/home/card_employment.js',
+                      format: ''
+                    }
+                  })
+            #hero-icon-navs
+              include ../home/hero__icon-nav.pug
+            #hero-scroll-arrow
+              a(href='#about-cork')
+                svg(viewBox="0 0 100 100")
+                  path(d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0")

@@ -1,0 +1,262 @@
+.accordion {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    width: 100%;
+    color: #e95d4f;
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    padding: 16px 8px;
+    background-color: transparent;
+    list-style: none;
+    z-index: 1;
+}
+
+.accordion h1 {
+    letter-spacing: 0.1rem;
+    color: #e95d4f;
+    font-size: 20px;
+}
+
+.accordion::-moz-focus-inner {
+    border: 0;
+}
+
+.accordion:focus {
+    outline: none;
+}
+
+.accordion:hover {
+    outline: none;
+}
+
+.accordion.open {
+    outline: none;
+
+}
+
+.accordion__arrow,
+.dropdown__arrow {
+    transition: all 150ms cubic-bezier(0.5, 0, 0.1, 1);
+    height: 1.25rem;
+    width: 1.25rem;
+    padding: .25rem .125rem .25rem .25rem;
+    margin: 0 0 0 .25rem;
+    fill: #e95d4f;
+    outline: none;
+    overflow: visible;
+    outline-offset: -0.5px
+}
+
+.dropdown__arrow {
+    fill: white;
+    transform: rotate(90deg);
+}
+
+.accordion.open .accordion__arrow {
+    transform: rotate(90deg);
+}
+
+.accordion__content {
+    transition: opacity 500ms, max-height 1000ms, padding 1500ms;
+    max-height: 0;
+    height: auto;
+    visibility: hidden;
+    opacity: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.accordion__content p {
+    padding: 0 8px;
+}
+
+.accordion__content h2 {
+    font-size: 18px;
+    padding: 0 8px 8px;
+    color: black;
+    font-weight: 300;
+}
+
+.accordion__content a {
+    /* padding-left: 1rem; */
+}
+
+.accordion__content.open {
+    /* color: #f8f8f8; */
+    padding: 16px 0;
+    margin: 0 auto;
+    height: auto;
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s, max-height 500ms;
+    margin-bottom: 16px;
+
+}
+
+/* required to stop events colliding on plotly layers even when hidden */
+#query-chart>div.accordion__content>#chart-geodemos>div>div>svg:nth-child(1)>g.draglayer.cursor-crosshair>g>rect.nsewdrag.drag.cursor-pointer {
+    z-index: -1;
+    width: 0;
+}
+
+#query-chart>div.accordion__content.open>#chart-geodemos>div>div>svg:nth-child(1)>g.draglayer.cursor-crosshair>g>rect.nsewdrag.drag.cursor-pointer {
+    z-index: -1;
+    width: 100%;
+}
+
+
+.accordion__content.leaflet-container {
+    min-height: 0;
+}
+
+.accordion__content.open.leaflet-container {
+    min-height: 280px;
+    height: auto;
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s, max-height 500ms;
+}
+
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    .accordion__content.open {
+        padding: 16px 0;
+        width: 100%;
+        max-width: 576px;
+
+    }
+
+    .accordion__content.open.leaflet-container {
+        width: 100%;
+        /* max-width: 512px; */
+    }
+
+
+
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media screen and (min-device-width: 1280px) {
+    .accordion {
+        padding: 0 0 16px 0;
+        cursor: auto;
+    }
+
+    .accordion h1 {
+        letter-spacing: 0.1rem;
+        color: #e95d4f;
+        font-size: 24px;
+        font-weight: 300;
+    }
+
+    .accordion__arrow {
+        display: none;
+    }
+
+
+    .accordion.open .accordion__arrow {
+        display: none;
+    }
+
+
+    /* keep accordians open on desktop */
+    .accordion__content {
+        padding: 0;
+        margin: 0;
+        height: auto;
+        max-height: 1000px;
+        width: 100%;
+        max-width: 100%;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 1s, max-height 500ms;
+        margin-bottom: 16px;
+    }
+
+    .accordion__content p {
+        padding: 0;
+
+    }
+
+    .accordion__content h2 {
+        font-size: 18px;
+        padding: 0 0 8px 0;
+    }
+
+    .accordion__content a {}
+
+    .accordion__content.open {
+        padding: 0;
+        margin: 0;
+        height: auto;
+        max-height: 1000px;
+        max-width: 100%;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 1s, max-height 500ms;
+        margin-bottom: 16px;
+    }
+
+    .accordion__content.leaflet-container {
+        min-height: 0;
+    }
+
+    .leaflet-container {
+        min-height: 400px;
+        height: auto;
+        max-height: 1000px;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 1s, max-height 500ms;
+    }
+
+}
+
+
+
+/*
+@media (max-width: 576px){
+  .app-icon{
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 900px){
+  .accordian-screenshot-container{
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 1200px){
+  .app-icon{
+    margin-bottom: 18px;
+  }
+
+  .accordian-screenshot{
+    max-height: 240px;
+    max-width: 90%;
+  }
+} */
+
+/* from this https://css-tricks.com/introduction-reduced-motion-media-query/ */
+@media screen and (prefers-reduced-motion: reduce) {
+
+    .accordion__arrow {
+        transition: none;
+    }
+}

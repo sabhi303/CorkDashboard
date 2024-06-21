@@ -1,0 +1,94 @@
+//- so alright, I need to change this to fetch everything from the database
+.theme
+    +theme__header({
+      id:'transport-header',
+      title:'Transport',
+      description:'Travel and transport trends for Cork',
+      moreinfo:'',
+      scrollref:'airport-passengers'
+    })
+
+    +theme__text-chart({
+      id:'airport-passengers',
+      sources:[{ 
+      link:'https://statbank.cso.ie/px/pxeirestat/Statire/SelectVarVal/Define.asp?maintable=TAQ01&PLanguage=0',
+      name: 'CSO'}],
+      title: 'Cork Airport Passengers',
+      description:'<p>The seasonaly-adjusted figure for passengers using Cork airport had been on an upward trend for the past 5 years or so. The impact on international travel due to the COVID-19 pandemic can be seen in the first quarter of 2020, however.</p>',
+      chartinfo:'',
+      chartids:['chart-airport-passengers'],
+      buttons:[],
+      plotoptions:{
+            src: '../../javascripts/themes/transport/airport_passengers.js'
+        }
+    })
+    
+    //- 'For comprehensive and up-to-date travel information including live availablity, arrivals and departures, and Real-Time Passenger Information, see our Getting Around query',
+    
+    
+    //- +theme__text-chart(
+      'public-transport-trips',
+      [{ 
+      link:'https://data.gov.ie/dataset/Cork-economic-monitor/resource/2da5e1ce-2a77-40f8-8d8d-c7f03885ab6b',
+      name: 'data.gov'},
+      { 
+      link:'https://data.smartCork.ie/dataset/4997223b-13b2-4c97-9e88-cd94c6d35aec/resource/2da5e1ce-2a77-40f8-8d8d-c7f03885ab6b/download/indicator-.8.-public-transport.csv',  
+      name: 'download'
+      }],
+      'Public Transport Usage',
+      '<p>Public transport is a key mode of travel in the city and has been growing across bus, train and Luas over the past decade, with the exception of Bus Eireann which remains relatively stable. As the city grows, along with the need to address climate change, these modes need to continue to expand, along with cycling and walking.</p>',
+      '<img src = "../images/transport/bus-w-15.svg"><h3>39.5 Million </h3><p> trips were taken on <b>Cork Bus</b> in the last quarter of 2019</p>',
+      ['chart-public-transport-trips']
+      )
+    //- +theme__text-chart({
+      id: 'traffic-counters',
+      sources: [{
+      link: 'https://www.nratrafficdata.ie/c2/gmapbasic.asp?sgid=ZvyVmXU8jBt9PJE$c7UXt6',
+      name: 'NRA Traffic Data'
+      },{
+      link: 'https://data.tii.ie/',
+      name: 'TII Data Portal'
+      }],
+      title: 'Traffic Counters',
+      description: '<p>Transport Infrastructure Ireland (TII) maintains traffic sensors along motorways to count the number of vehicles. Vehicle sensors help track changes in road usage over time and estimate traffic volumes. This data is released as a yearly average daily number of vehicles.</p><br><p> Use the map to compare the <b>Daily Vehicle Count</b> at sensors around the M50 over the past 6 months, up to the latest data available. Click on a car icon to open a summary popup chart</p>',
+      chartinfo:'',
+      chartids: ['map-traffic-counters'],
+      buttons: []
+      })
+
+    
+    
+    //- +theme__text-chart(
+      'Cork-bikes',
+      [{
+      link: 'https://Corkbikes.staging.derilinx.com/',
+      name: 'Derilinx API'},
+      {
+      link: 'http://www.Corkbikes.ie/',
+      name: 'Corkbikes.ie'
+      }],
+      'Cork Bikes',
+      '<p>Just Eat Corkbikes is a self-service bike rental system open to everyone from 14 years of age. Users can travel through the city centre, commute between home and work and get out and about to enjoy Cork City at their leisure. Visit the <a href = \'http://www.Corkbikes.ie/\' target=\"blank\"\'>Cork Bikes website</a> for more information </p>',
+      '<p>The chart shows the general trend of bikes availability for the past day, week and month- click on a button to move between views</p>',
+      ['chart-Corkbikes'],
+      [{
+      id: 'Corkbikes_day',
+      name: 'Yesterday'
+      },{
+      id: 'Corkbikes_week',
+      name: 'Week'
+      },
+      {
+      id: 'Corkbikes_month',
+      name: 'Month'
+      }]
+      )
+    
+    
+
+
+
+        
+block append scripts
+  //- script(src="/javascripts/themes/transport/airport_passengers.js" type="module")
+  //- script(src="/javascripts/themes/transport/transport_traffic.js" type="module")

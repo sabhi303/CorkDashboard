@@ -1,0 +1,207 @@
+.leaflet-container {
+  min-height: 256px;
+}
+
+.leaflet-div-icon {
+  border: none;
+  background: transparent;
+}
+
+.leaflet-marker-pane img {
+  /* background-color: green; */
+}
+
+.leaflet-marker-icon {
+  background-color: transparent;
+  fill: black;
+  opacity: 0.8;
+}
+
+.leaflet-marker-icon+.online {
+  background-color: transparent;
+  fill: black;
+  opacity: 0.8;
+}
+
+.leaflet-marker-icon+.offline {
+  background-color: transparent;
+  fill: black;
+  opacity: 0.7;
+}
+
+.leaflet-marker-icon .number {
+  color: black;
+  position: relative;
+  top: -50px;
+  width: 25px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/**
+ * .leaflet-popup-chart .leaflet-popup-content{ width: 250px !important; height:
+ * 175px !important; padding: 0; margin: 0; }
+ */
+
+/**
+ * .leaflet-popup-chart svg{ width: 100%; height: 100px; padding: 0; margin: 0;
+ * /* transform: translate(0,100px)
+ */
+
+/* } */
+
+
+
+.leaflet-popup-content-wrapper {
+  width: 256px;
+  min-height: 128px;
+  height: auto;
+  background: white;
+  font-family: 'Roboto';
+  font-weight: 200;
+  opacity: 0.95;
+  padding: 0;
+
+}
+
+.leaflet-popup-content {
+  padding: 0;
+  margin: 0;
+}
+
+.map-popup {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  padding: 8px;
+
+}
+
+.map-popup svg {
+  transform: translateY(8px)
+}
+
+.map-popup h1 {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.map-popup h2 {
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.map-popup p {
+  font-weight: 200;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.map-popup__title {
+  width: 100%;
+  margin: 0;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: flex-start;
+  text-transform: uppercase;
+}
+
+.map-popup__subtitle {
+  width: 100%;
+  margin: 0;
+  padding: 8px 16px;
+
+}
+
+.map-popup__kpi {
+  width: 100%;
+  margin: 0;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+
+}
+
+.map-popup__kpi h1 {
+  font-size: 28px;
+}
+
+.map-popup__kpi p {
+  font-size: 14px;
+  color: #e95d4f;
+
+}
+
+.map-popup__info {
+  width: 100%;
+  margin: 0;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+
+}
+
+.map-popup-error {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Need to set height of svg plot in px here */
+
+.map-popup__chart {
+  width: 100%;
+  height: 100px;
+}
+
+.map-popup__chart svg {
+  width: 100%;
+  height: inherit;
+}
+
+.bikesStationPopup {
+  width: 250px !important;
+  height: 175px !important;
+  background: #001f35;
+}
+
+.bikesStationPopup .leaflet-popup-content {
+  width: 250px !important;
+  height: 175px !important;
+  /* color: #ffffff; */
+  /* font-size:16px; line-height:24px; border-radius: 0px; */
+  /* color:#fff; text colour */
+}
+
+
+/* .dc-chart .axis { display: none; } */
+
+/* .dc-chart .axis text { font-size: 50px; fill: #ffffff; } */
+
+.dc-chart svg g g.axis.y {
+  display: none;
+}
+
+.dc-chart text {
+  fill: #ffffff;
+}
+
+@media only screen and (min-device-width : 1280px) {
+
+  .leaflet-container {
+    min-height: 320px;
+    height: 360px;
+    width: 100%;
+
+  }
+}
+
+/*  */

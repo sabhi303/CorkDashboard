@@ -1,0 +1,128 @@
+mixin about-cork-dashboard(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASHBOARD', twitterHandle: '@corkdashboard', description: '', additionalInfo: ''})
+    #about-cork-dashboard.home__about
+        #about-cork-dashboard__header.home__about__header 
+            h1= options.header
+        #about-cork-dashboard__twitter
+            p Follow !{options.twitterHandle} on Twitter
+        #about-cork-dashboard__card.home__about__card
+            p !{options.description}
+            p !{options.additionalInfo}
+
+    script(type="module").
+        'use strict'
+        // Additional JavaScript code can go here, if necessary
+
+mixin about-cork(options = {id: 'about-cork', header: 'ABOUT CORK', area: 'xxx.xx', populationYear: 'xxxx', populationCount: 'x,xxx,xxx', populationChange: 'xx%', populationTrendText: 'increasing'})
+    #about-cork.home__about
+        #about-cork__header.home__about__header
+            h1= options.header
+        #about-cork__card.home__about__card
+            p Cork is the largest county in Ireland. 
+              | It is located in the south-west of the country, in the province of Munster, and covers a total area of 
+              span#cork__area #{options.area}
+              | . At the time of the census in 
+              span#cork__population_year #{options.populationYear}
+              | , Cork had a total population of 
+              span#cork__population-count #{options.populationCount}
+              |  people. This was a change of 
+              span#cork__population-change #{options.populationChange}
+              |  on the previous census of 2011, or 
+              span#cork__population-trend-text #{options.populationTrendText}.
+
+            p
+              | There are 2 local authorities whose remit encompasses the geographic area of the county and city of Cork. In May 2019, 
+              a(href='https://www.corkcity.ie/en/council-services/public-info/boundary-extension/' target='_blank') a boundary extension
+              |  meant that Cork City grew to nearly five times its previous size.
+            p Select a council on the map in the next section to see specific information.
+
+
+//- FOLLOWING IS FOR THE MAKING THIS STUFF EDITABLE, WILL WORK ON IT LATER!!!!!!!!!
+
+//- mixin about-cork-dashboard(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASHBOARD', twitterHandle: '@corkdashboard', description: '', additionalInfo: ''})
+//-     #about-cork-dashboard.home__about
+//-         #about-cork-dashboard__header.home__about__header 
+//-             h1.content-editable(data-editable=true, data-field="header")= options.header
+//-         #about-cork-dashboard__twitter
+//-             p Follow 
+//-             span.content-editable(data-editable=true, data-field="twitterHandle")= options.twitterHandle
+//-             |  on Twitter
+//-         #about-cork-dashboard__card.home__about__card
+//-             p.content-editable(data-editable=true, data-field="description")= options.description
+//-             p.content-editable(data-editable=true, data-field="additionalInfo")= options.additionalInfo
+
+//-     style.
+//-         .content-editable {
+//-             border: 1px dashed #aaa;
+//-             padding: 2px;
+//-             margin: 2px;
+//-             display: inline-block;
+//-         }
+
+//-         .content-editable[data-editable="true"]:hover {
+//-             background-color: #f0f0f0;
+//-             cursor: text;
+//-         }
+
+//-     script(type="module").
+//-         'use strict'
+//-         document.addEventListener('DOMContentLoaded', () => {
+//-             document.querySelectorAll('[data-editable]').forEach(element => {
+//-                 element.addEventListener('input', (event) => {
+//-                     const field = event.target.dataset.field;
+//-                     const value = event.target.textContent;
+//-                     console.log(`Field ${field} updated to ${value}`);
+//-                     // You can add AJAX calls here to save changes to the server if needed
+//-                 });
+//-             });
+//-         });
+
+//- mixin about-cork(options = {id: 'about-cork', header: 'ABOUT CORK', area: 'xxx.xx', populationYear: 'xxxx', populationCount: 'x,xxx,xxx', populationChange: 'xx%', populationTrendText: 'increasing'})
+//-     #about-cork.home__about
+//-         #about-cork__header.home__about__header
+//-             h1.content-editable(data-editable=true, data-field="header")= options.header
+//-         #about-cork__card.home__about__card
+//-             p 
+//-               | Cork is the largest county in Ireland. 
+//-               | It is located in the south-west of the country, in the province of Munster, and covers a total area of 
+//-               span.content-editable(data-editable=true, data-field="area") #{options.area}
+//-               | . At the time of the census in 
+//-               span.content-editable(data-editable=true, data-field="populationYear") #{options.populationYear}
+//-               | , Cork had a total population of 
+//-               span.content-editable(data-editable=true, data-field="populationCount") #{options.populationCount}
+//-               |  people. This was a change of 
+//-               span.content-editable(data-editable=true, data-field="populationChange") #{options.populationChange}
+//-               |  on the previous census of 2011, or 
+//-               span.content-editable(data-editable=true, data-field="populationTrendText") #{options.populationTrendText}
+//-               | .
+
+//-             p
+//-               | There are 2 local authorities whose remit encompasses the geographic area of the county and city of Cork. In May 2019, 
+//-               a(href='https://www.corkcity.ie/en/council-services/public-info/boundary-extension/' target='_blank') a boundary extension
+//-               |  meant that Cork City grew to nearly five times its previous size.
+//-             p Select a council on the map in the next section to see specific information.
+
+//-     style.
+//-         .content-editable {
+//-             border: 1px dashed #aaa;
+//-             padding: 2px;
+//-             margin: 2px;
+//-             display: inline-block;
+//-         }
+
+//-         .content-editable[data-editable="true"]:hover {
+//-             background-color: #f0f0f0;
+//-             cursor: text;
+//-         }
+
+//-     script(type="module").
+//-         'use strict'
+//-         document.addEventListener('DOMContentLoaded', () => {
+//-             document.querySelectorAll('[data-editable]').forEach(element => {
+//-                 element.addEventListener('input', (event) => {
+//-                     const field = event.target.dataset.field;
+//-                     const value = event.target.textContent;
+//-                     console.log(`Field ${field} updated to ${value}`);
+//-                     // Will add AJAX calls here to save changes to the server if needed
+//-                 });
+//-             });
+//-         });

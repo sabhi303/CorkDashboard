@@ -1,0 +1,74 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto',
+    sans-serif;
+  background-color: #eeecec;
+}
+
+a {
+  color: #e95d4f;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+/* unvisited link */
+
+a:link {
+  color: #e95d4f;
+  text-decoration: none;
+}
+
+/* visited link */
+
+a:visited {
+  color: #e95d4f;
+  text-decoration: none;
+
+}
+
+/* mouse over link */
+
+a:hover {
+  color: #e95d4f;
+  text-decoration: none;
+
+}
+
+/* selected link */
+
+a:active {
+  text-decoration: none;
+}
+
+p,
+i,
+h1,
+h2,
+h3 {
+  color: #e95d4f;
+  margin: 0;
+  padding: 0;
+}
+
+/* used to colour text and arrows indicating trends */
+.trend-up {
+  color: green;
+}
+
+.trend-down {
+  color: red;
+}

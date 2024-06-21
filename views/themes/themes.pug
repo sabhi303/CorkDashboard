@@ -1,0 +1,71 @@
+extends ../layout
+include ../themes/themes__subnav.pug
+include ../component/theme__header
+include ../component/theme__text-chart
+
+block append head
+    link(rel='stylesheet', href='/stylesheets/bcd-d3-charts.css')
+    link(rel='stylesheet', href='/stylesheets/components/bcd-spinner.css')
+    link(rel='stylesheet', href='/stylesheets/components/bcd-subnav.css')
+    link(rel='stylesheet', href='/stylesheets/themes/themes.css')
+    link(rel='stylesheet', href='https://unpkg.com/leaflet@1.3.1/dist/leaflet.css')
+    //-   link(rel='stylesheet', href='/stylesheets/lib/marker-cluster-modified.css')
+    //-   link(rel='stylesheet', href='/stylesheets/themes/leaflet-chart.css')rs
+    //-  common libraries for charts and maps on Themes page
+    script(src="/lib/d3v5/d3.min.js" type="text/javascript" defer)
+    script(src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" defer)
+    script(src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js" defer)
+    script(src="/lib/proj4.js" type="text/javascript" defer)
+  
+
+block navigation
+    +bcd-navbar("bcd-navbar","/","Cork Dashboard", "Themes")
+    +themes__subnav("subnav")
+
+block content 
+    #transport
+      include theme_transport
+    //- #environment
+      include theme_environment
+    #housing
+      include theme_housing
+    #economy
+      include theme_economy
+    //- #education
+    //-   include theme_education
+    #health
+      include theme_health
+    #demographics
+      include theme_demographics
+
+append scripts
+
+  
+  //- script(src="/lib/underscore-min.js" type="text/javascript")
+  //- script(src="https://unpkg.com/moment" type="text/javascript")
+  //- script(src="/javascripts/charts/formats_common.js" type="text/javascript")
+  
+  //- //-script(src="/javascripts/themes/trolleys.js" type="text/javascript")
+  //- //- script(src="/javascripts/themes/transport/transport_common.js" type="text/javascript")
+  //- script(src="/javascripts/themes/economy/economy_indicator_transport.js" type="module")
+  //- script(src="/javascripts/themes/transport/transport_dublinbikes.js" type="module")
+  //- script(src="/javascripts/themes/transport/transport_traffic_counters.js" type="module")
+  //- //- script(src="/javascripts/themes/maps_common.js" type="text/javascript")
+  //- script(src="/javascripts/themes/environment/environment_water_levels.js" type="text/javascript")
+  //- script(src="/javascripts/themes/environment/environment_noise.js" type="module")
+  //- //-script(src="/javascripts/charts/treemap.js" type="text/javascript")
+  
+
+  //- script(src="/javascripts/themes/education.js" type="module")
+  //- //- //- //- script(src="/javascripts/themes/health.js" type="text/javascript")
+  //- //- 
+  //- script(src="/javascripts/themes/economy/economy_employment.js" type="module")
+  //- script(src="/javascripts/themes/economy/economy_gva.js" type="module")
+  //- script(src="/javascripts/themes/economy/economy_employment_size.js" type="module")
+  //- script(src="/javascripts/themes/economy/economy_indicator_employment_sector.js" type="module")
+  //- script(src="/javascripts/themes/economy/economy_indicator_airport.js" type="module")
+  //- script(src="/javascripts/themes/economy/economy_indicator_port.js" type="module")
+  //- //- 
+ 
+  //- //- script(src="/javascripts/themes/themes_resize.js" type="text/javascript")
+  //- //- script(src="/javascripts/scroll_observer.js" type="text/javascript")

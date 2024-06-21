@@ -1,0 +1,61 @@
+extends ../layout
+include ../component/card-sub-home
+
+block append head
+
+  link(rel="stylesheet", href="/stylesheets/lib/flickity.min.css")
+  link(rel="stylesheet", href="/stylesheets/components/bcd-sub-home.css")
+  //- link(rel="stylesheet", href="/stylesheets/card.css")
+
+block navigation
+  +bcd-navbar("bcd-navbar","/","Cork Dashboard", "Queries")
+
+block content
+  #sub-home 
+    #sub-home__grid
+      #sub-home__icon
+        svg()
+          use(href='/images/icons/icons-48px/Queries_Icon_48px.svg#Layer_1')
+      #sub-home__title
+        h1 Queries
+      #sub-home__description
+        p Interact with maps and charts to find answers to common questions. 
+      #sub-home__carousel
+        <div class="carousel" data-flickity='{ "freeScroll": true, "wrapAround": false, "freeScrollFriction": 0.05,"selectedAttraction": 0.05, "cellSelector": ".carousel-cell", "cellAlign": "left", "percentPosition": false, "pageDots": true, "adaptiveHeight": true}'>
+          .carousel-cell
+              +card-sub-home({
+                title: 'Geodemographics', 
+                description: '<p>Geodemographic classification is a statistical tool that groups spatial units based on socio-economic characteristics.  This query follows the Ireland Geodemographic classification method with a focus on Cork.  Small Areas (SAs) are selected as spatial units and 2016 Census of Population results are used for socio-economic components.</p>', 
+                links: [{
+                  href :"queries/geodemos",
+                  name:'Launch Geodeomgraphics'
+                  }]
+              })
+          .carousel-cell
+              +card-sub-home({
+                title: 'Live Travel', 
+                description: '<p>The Live Travel query gathers the current status of various travel modes, including public and private transport, bikes schemes, car-park capacities, travel times and more.</p>',
+                links: [{
+                  href :"queries/live-travel",
+                  name:'Launch Live Travel'
+                  }]
+                })
+          .carousel-cell
+              +card-sub-home({
+                title: 'Live Environment', 
+                description: '<i>Live Environment is under construction, please check back soon.</i>',
+                links: [{
+                  href :"queries/live-environment",
+                  name:'Launch Live Environment'
+                  }]
+                })
+          .carousel-cell
+              +card-sub-home({
+                title: 'Economy at a Glance', 
+                description: '<i>Economy at a Glance is under construction, please check back soon.</i>'
+                })    
+        </div>
+
+block append scripts
+  //- script(src="https://unpkg.com/flickity@2/dist/flickity.pkgd.js" type="text/javascript")
+  script(src="./lib/flickity.pkgd.min.js" type="text/javascript")

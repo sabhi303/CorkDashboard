@@ -1,0 +1,9 @@
+{
+    "ignore": [
+        "/node_modules/*",
+        "/docs/*",
+        "/npm Libraries/*",
+        "/bin/*",
+        "/public/data/*"
+    ]
+}
