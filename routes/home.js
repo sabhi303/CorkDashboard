@@ -32,6 +32,10 @@ router.get('/', async function (req, res, next) {
 
 // redirects for old page
 router.get('/home', function (req, res, next) {
+  res.render('home-admin', { title: 'Cork Dashboard Home | Admin'});
+});
+
+router.get('/admin', function (req, res, next) {
   res.redirect(302, '/');
 });
 
