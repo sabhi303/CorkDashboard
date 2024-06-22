@@ -30,7 +30,9 @@ router.get('/', async function (req, res, next) {
   }
 });
 
-// redirects for old page
+// redirects for old page or some admin thing!!
+// here, everything should be done from admin router I belive, 
+// temporarily keeping the following!
 router.get('/home', function (req, res, next) {
   res.render('home-admin', { title: 'Cork Dashboard Home | Admin'});
 });

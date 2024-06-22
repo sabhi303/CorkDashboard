@@ -1,12 +1,29 @@
-mixin about-cork-dashboard(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASHBOARD', twitterHandle: '@corkdashboard', description: '', additionalInfo: ''})
+mixin about-cork-dashboard(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASHBOARD', twitterHandle: '@corkdashboard', description: '', additionalInfo: '', isEditable: false})
     #about-cork-dashboard.home__about
         #about-cork-dashboard__header.home__about__header 
             h1= options.header
         #about-cork-dashboard__twitter
             p Follow !{options.twitterHandle} on Twitter
         #about-cork-dashboard__card.home__about__card
+            if options.isEditable
+                .edit-icon-wrapper
+                    include ../../public/images/icons/admin/pencil.svg
             p !{options.description}
             p !{options.additionalInfo}
+
+        // Add CSS for positioning and hover effect
+        style.
+            .edit-icon-wrapper {
+                position: relative;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+            .edit-icon-wrapper:hover {
+                transform: scale(1.1); /* Example scale effect on hover */
+            }
+                
 
     script(type="module").
         'use strict'
