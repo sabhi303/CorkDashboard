@@ -191,12 +191,13 @@ block content
             span#local__text-2
 
           p See more in our <a href='/themes#demographics'>Demographics Theme</a> 
-            
+  each card in aboutCards
     +about-cork-dashboard({
-        header: aboutCardsContent["About The Dashboard"].header,
-        twitterHandle: aboutCardsContent["About The Dashboard"].twitterHandle,
-        description: aboutCardsContent["About The Dashboard"].description,
-        additionalInfo: aboutCardsContent["About The Dashboard"].additionalInfo,
+        id: card.id,
+        header: card.header,
+        twitterHandle: card.twitterHandle,
+        description: card.description,
+        additionalInfo: card.additionalInfo,
         isEditable: isEditable
         })
 

@@ -3,27 +3,15 @@ var router = express.Router({
   mergeParams: true
 });
 
-const {connectToDatabase} = require('../database/db');
-
-const getaboutdata = async () => {
-  try {
-    const db = await connectToDatabase();
-    const collection = db.collection('home');
-    const content = await collection.findOne({});
-    // console.log(content);
-    return content.data;
-  } catch (error) {
-    console.error('Error reading the about data from the database', error);
-  }
-}
+const AboutCard = require('../models/HomeAboutCard');
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
   try {
     // now here the description of the things which I will change and fetch from the database
-    const content = await getaboutdata(); // Await the promise here
-    // console.log(content);
-    res.render('home', { title: 'Cork Dashboard Home', aboutCardsContent: content });
+    const content = await AboutCard.find({});
+  
+    res.render('home', { title: 'Cork Dashboard Home', aboutCards: content });
   } catch (error) {
     console.error('Error rendering the home page', error);
     res.status(500).send('Internal Server Error');
