@@ -156,13 +156,13 @@ block content
               a(href='#about-cork')
                   <svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" ></path></svg>
 
-    +about-cork({
-          header: 'ABOUT CORK',
-          area: 'xxx.xx',
-          populationYear: 'xxxx',
-          populationCount: 'x,xxx,xxx',
-          populationChange: 'xx%',
-          populationTrendText: 'increasing'
+    +about-cards({
+        id: cork.id,
+        header: cork.header,
+        twitterHandle: cork.twitterHandle,
+        description: cork.description,
+        additionalInfo: cork.additionalInfo,
+        isEditable: isEditable
         })
       
     #regions-info.home__about
@@ -192,7 +192,7 @@ block content
 
           p See more in our <a href='/themes#demographics'>Demographics Theme</a> 
   each card in aboutCards
-    +about-cork-dashboard({
+    +about-cards({
         id: card.id,
         header: card.header,
         twitterHandle: card.twitterHandle,

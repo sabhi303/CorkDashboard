@@ -7,7 +7,6 @@ const {connectToDatabase} = require('../database/db');
 
 /* Administration Dashboard */
 router.get('/', function (req, res, next) {
-    // res.send("Hello");
   res.render('admin/admin', {
     title: 'Cork Dashboard | Admin',
     active: 'Admin'
@@ -26,9 +25,10 @@ const AboutCard = require('../models/HomeAboutCard');
 router.get('/home', async function (req, res, next) {
   try {
     // now here the description of the things which I will change and fetch from the database
-    const content = await AboutCard.find({});
+    const content = await AboutCard.find({id: {$ne: "about-cork"}});
+    const cork =  await AboutCard.findOne({id:"about-cork"});
     // console.log(content);
-    res.render('home', { title: 'Cork Dashboard Home', aboutCards: content, isEditable : true });
+    res.render('home', { title: 'Cork Dashboard Home', aboutCards: content, cork:cork, isEditable : true });
   } catch (error) {
     console.error('Error rendering the home page', error);
     res.status(500).send('Internal Server Error');

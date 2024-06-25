@@ -9,9 +9,9 @@ const AboutCard = require('../models/HomeAboutCard');
 router.get('/', async function (req, res, next) {
   try {
     // now here the description of the things which I will change and fetch from the database
-    const content = await AboutCard.find({});
-  
-    res.render('home', { title: 'Cork Dashboard Home', aboutCards: content });
+    const content = await AboutCard.find({id: {$ne: "about-cork"}});
+    const cork =  await AboutCard.findOne({id:"about-cork"});
+    res.render('home', { title: 'Cork Dashboard Home', aboutCards: content, cork:cork });
   } catch (error) {
     console.error('Error rendering the home page', error);
     res.status(500).send('Internal Server Error');
