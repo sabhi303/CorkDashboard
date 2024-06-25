@@ -41,21 +41,34 @@ router.get('/home', async function (req, res, next) {
 // let's see how this goes
 
 /* [AJAX] [POST] updated data of home page from admin. */
+
+async function updateaboutdata(updatedData) {
+  try {
+    const { id, ...updateFields } = updatedData;
+    const result = await AboutCard.findOneAndUpdate({ id: id }, updateFields, { new: true });
+    return result;
+  } catch (error) {
+    throw new Error('Error updating the about card: ' + error.message);
+  }
+}
+
 router.post('/home/edit', async function (req, res, next) {
   try {
-    const updatedData = req.body.content;
-
+    const updatedData = req.body;
     console.log(updatedData);
 
-    // temporarily commenting the below line so that I can implement the function accordingly
-    // await updateaboutdata(updatedData);
-    res.redirect('/admin-edit');
+    const result = await updateaboutdata(updatedData);
+
+    if (result) {
+      res.status(200).send({ message: 'Update successful', data: result });
+    } else {
+      res.status(404).send({ message: 'Record not found' });
+    }
   } catch (error) {
     console.error('Error updating the home page content', error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send({ message: 'Internal Server Error' });
   }
-});
-
+})
 
 /* ////////////////////// */
 

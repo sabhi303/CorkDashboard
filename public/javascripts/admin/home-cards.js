@@ -96,6 +96,8 @@ export function editHeader(options) {
 
             // Collect form values
             const formData = {};
+            // Add the id :)
+            formData['id'] = options.id;
             for (const [key, value] of Object.entries(options)) {
                 if (key === 'description' || key === 'additionalInfo') {
                     formData[key] = quillEditors[key].root.innerHTML;
@@ -106,6 +108,28 @@ export function editHeader(options) {
                     }
                 }
             }
+
+            // Now here will put on the updation logic :)
+            // basically need to call the API of updation 
+
+            // Send form data as POST request to API endpoint
+            fetch('/admin/home/edit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success - e.g., close the popup, show a success message
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error - e.g., show an error message
+            });
+            
 
             console.log('Form submitted!');
             console.log('Form Data:', formData);
