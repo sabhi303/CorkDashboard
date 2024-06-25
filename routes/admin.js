@@ -55,7 +55,6 @@ async function updateaboutdata(updatedData) {
 router.post('/home/edit', async function (req, res, next) {
   try {
     const updatedData = req.body;
-    console.log(updatedData);
 
     const result = await updateaboutdata(updatedData);
 

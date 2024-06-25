@@ -1,8 +1,6 @@
 'use strict';
 
 export function editHeader(options) {
-    console.log(options);
-
     // Create the overlay element
     const overlay = document.createElement('div');
     overlay.classList.add('popup-overlay');
@@ -94,9 +92,11 @@ export function editHeader(options) {
         document.getElementById('popupForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
+            // Display loading popup
+            const loadingOverlay = displayPopup('Loading...', true);
+
             // Collect form values
             const formData = {};
-            // Add the id :)
             formData['id'] = options.id;
             for (const [key, value] of Object.entries(options)) {
                 if (key === 'description' || key === 'additionalInfo') {
@@ -109,9 +109,6 @@ export function editHeader(options) {
                 }
             }
 
-            // Now here will put on the updation logic :)
-            // basically need to call the API of updation 
-
             // Send form data as POST request to API endpoint
             fetch('/admin/home/edit', {
                 method: 'POST',
@@ -122,20 +119,21 @@ export function editHeader(options) {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
-                // Handle success - e.g., close the popup, show a success message
+                // Remove loading popup
+                document.body.removeChild(loadingOverlay);
+                // Show success message
+                displayPopup('Success! Your changes have been saved.', false);
+                // Update the content on the page
+                updatePageContent(formData);
+                // Remove the overlay
+                document.body.removeChild(overlay);
             })
             .catch((error) => {
-                console.error('Error:', error);
-                // Handle error - e.g., show an error message
+                // Remove loading popup
+                document.body.removeChild(loadingOverlay);
+                // Show error message
+                displayPopup('Error! Something went wrong. Please try again.', false);
             });
-            
-
-            console.log('Form submitted!');
-            console.log('Form Data:', formData);
-
-            // Remove the overlay
-            document.body.removeChild(overlay);
         });
 
         // Add event listener to the cancel button
@@ -153,7 +151,6 @@ export function editHeader(options) {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            
         }
         .popup-overlay {
             position: fixed;
@@ -221,9 +218,67 @@ export function editHeader(options) {
         .form-group #cancelButton:hover {
             background: #5a6268;
         }
+        .popup-message {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            max-width: 300px;
+            margin: auto;
+        }
     `;
 
     document.head.appendChild(styles);
+
+    function displayPopup(message, isLoading, overlayToRemove = null) {
+        const messageOverlay = document.createElement('div');
+        messageOverlay.classList.add('popup-overlay');
+
+        const messageBox = document.createElement('div');
+        messageBox.classList.add('popup-message');
+
+        messageBox.innerHTML = `<p>${message}</p>`;
+        messageOverlay.appendChild(messageBox);
+        document.body.appendChild(messageOverlay);
+
+        if (!isLoading) {
+            setTimeout(() => {
+                document.body.removeChild(messageOverlay);
+                if (overlayToRemove) {
+                    document.body.removeChild(overlayToRemove);
+                }
+            }, 3000);
+        }
+
+        return messageOverlay;
+    }
+
+
+    // Okay, here I need to do the thing
+    function updatePageContent(data) {
+        location.reload();
+        return false;
+        // for (const [key, value] of Object.entries(data)) {
+        //     const element = document.getElementById(key);
+        //     if (element) {
+        //         if (key === 'descriptionId' || key === 'additionalInfoId') {
+        //             element.innerHTML = value;
+        //         } else {
+        //             element.textContent = value;
+        //         }
+        //     }
+       
+        //     // Update text content or input values
+        //     if (key !== 'descriptionId' && key !== 'additionalInfoId') {
+        //         const inputElement = document.getElementById(key);
+        //         if (inputElement) {
+        //             inputElement.value = value;
+        //         }
+        //     }
+        // }
+    }
+    
 }
 
 window.editHeader = editHeader;
