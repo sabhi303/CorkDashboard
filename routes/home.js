@@ -25,9 +25,9 @@ router.get('/home', function (req, res, next) {
   res.render('home-admin', { title: 'Cork Dashboard Home | Admin'});
 });
 
-router.get('/admin', function (req, res, next) {
-  res.redirect(302, '/');
-});
+// router.get('/admin', function (req, res, next) {
+//   res.redirect(302, '/');
+// });
 
 router.get('/index', function (req, res, next) {
   res.redirect(302, '/');

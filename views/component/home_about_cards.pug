@@ -1,40 +1,47 @@
+include admin/popup-form.pug
+
 mixin about-cork-dashboard(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASHBOARD', twitterHandle: '@corkdashboard', description: '', additionalInfo: '', isEditable: false})
-    #about-cork-dashboard.home__about
-        #about-cork-dashboard__header.home__about__header 
-            h1.header
-                span= options.header
-                if options.isEditable
-                    .edit-icon-wrapper(onclick=`editHeader(${JSON.stringify(options)})`)
-                        include ../../public/images/icons/admin/pencil.svg
-        #about-cork-dashboard__twitter
-            p Follow !{options.twitterHandle} on Twitter
-        #about-cork-dashboard__card.home__about__card
-            p !{options.description}
-            p !{options.additionalInfo}
+  #about-cork-dashboard.home__about
+    #about-cork-dashboard__header.home__about__header 
+      h1.header
+        span= options.header
+        if options.isEditable
+          .edit-icon-wrapper(onclick=`editHeader(${JSON.stringify(options)})`)
+            include ../../public/images/icons/admin/pencil.svg
+    #about-cork-dashboard__twitter
+      p Follow !{options.twitterHandle} on Twitter
+    #about-cork-dashboard__card.home__about__card
+      p !{options.description}
+      p !{options.additionalInfo}
 
-        // Add CSS for positioning and hover effect
-        style.
-           .header {
-                display: flex;
-                align-items: center;
-            }
+    // Add CSS for positioning and hover effect
+    style.
+       .header {
+            display: flex;
+            align-items: center;
+        }
 
-            .edit-icon-wrapper {
-                margin-left: 10px;
-                display: flex;
-                cursor: pointer;
-                transition: transform 0.2s, color 0.2s;
-                hover: 
-                align-items: center;
-            }
-            .edit-icon-wrapper:hover {
-                transform: scale(1.2);
-                color: #007BFF;
-            }
-    if options.isEditable
-        script(type="module" src="/javascripts/admin/home-cards.js")
+        .edit-icon-wrapper {
+            margin-left: 10px;
+            display: flex;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .edit-icon-wrapper:hover {
+            transform: scale(1.2);
+            color: #007BFF;
+        }
+
+  if options.isEditable
+    script(type="module" src="/javascripts/admin/home-cards.js")
+
+  if options.isEditable
+    // Invoke the popup form component with specific options
+    +popupForm()
 
 
+
+//- This shit has to be changed :), will do that soon
 mixin about-cork(options = {id: 'about-cork', header: 'ABOUT CORK', area: 'xxx.xx', populationYear: 'xxxx', populationCount: 'x,xxx,xxx', populationChange: 'xx%', populationTrendText: 'increasing'})
     #about-cork.home__about
         #about-cork__header.home__about__header
@@ -57,3 +64,5 @@ mixin about-cork(options = {id: 'about-cork', header: 'ABOUT CORK', area: 'xxx.x
               a(href='https://www.corkcity.ie/en/council-services/public-info/boundary-extension/' target='_blank') a boundary extension
               |  meant that Cork City grew to nearly five times its previous size.
             p Select a council on the map in the next section to see specific information.
+
+

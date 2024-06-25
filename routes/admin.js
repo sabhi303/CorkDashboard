@@ -17,8 +17,6 @@ router.get('/', function (req, res, next) {
 
 /* ////////////////////// */
 
-
-
 /* Edit Home page of the Dashboard */
 
 const AboutCard = require('../models/HomeAboutCard');
