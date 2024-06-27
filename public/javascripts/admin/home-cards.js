@@ -1,6 +1,6 @@
 'use strict';
 
-export function editHeader(options) {
+export function editHeader(options,api) {
     // Create the overlay element
     const overlay = document.createElement('div');
     overlay.classList.add('popup-overlay');
@@ -97,7 +97,7 @@ export function editHeader(options) {
 
             // Collect form values
             const formData = {};
-            formData['id'] = options.id;
+            formData['id'] = options.id || options._id; // this or that :)
             for (const [key, value] of Object.entries(options)) {
                 if (key === 'description' || key === 'additionalInfo') {
                     formData[key] = quillEditors[key].root.innerHTML;
@@ -110,7 +110,7 @@ export function editHeader(options) {
             }
 
             // Send form data as POST request to API endpoint
-            fetch('/admin/home/edit', {
+            fetch(api, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -263,4 +263,17 @@ export function editHeader(options) {
     
 }
 
+
+export function editRegion(data, api) {
+    const regionName = document.getElementById("local__title").textContent.trim();
+    var options;
+    data.forEach((element) => {
+      if (element.id == regionName) {
+        options = element;
+      }
+    });
+    editHeader(options, api);
+}
+
 window.editHeader = editHeader;
+window.editRegion = editRegion;

@@ -1,22 +1,26 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const regiosnSchema = new Schema({
-    _id: Schema.Types.ObjectId,
-  name: {
+const regionSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  English: {
     type: String,
     required: true
   },
-  translations: {
-    type: Map,
-    of: {
-      English: String,
-      GAEILGE: String,
-      description: String
-    }
+  GAEILGE: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
   }
 });
 
-const RegionsInfo = mongoose.model('RegionsInfo', regiosnSchema, 'home-regions-info');
+const RegionsInfo = mongoose.model('RegionsInfo', regionSchema, 'home-regions-info');
 
 module.exports = RegionsInfo;

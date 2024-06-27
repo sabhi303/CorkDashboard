@@ -74,6 +74,37 @@ router.post("/home/edit", async function (req, res, next) {
   }
 });
 
+
+/* Regions */
+async function updateRegionsData(updatedData) {
+  try {
+    const { id, ...updateFields } = updatedData;
+    const result = await RegionsInfo.findOneAndUpdate({ id: id }, updateFields, {
+      new: true,
+    });
+    return result;
+  } catch (error) {
+    throw new Error("Error updating the about card: " + error.message);
+  }
+}
+
+router.post("/home/regions/edit", async function (req, res, next) {
+  try {
+    const updatedData = req.body;
+
+    const result = await updateRegionsData(updatedData);
+
+    if (result) {
+      res.status(200).send({ message: "Update successful", data: result });
+    } else {
+      res.status(404).send({ message: "Record not found" });
+    }
+  } catch (error) {
+    console.error("Error updating the home page content", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 /* ////////////////////// */
 
 module.exports = router;

@@ -5,14 +5,12 @@ mixin regions-info-card(options = {data:{}, isEditable: false})
         h1#local__title(style="flex: 1;")
         h1#irish__title
         if options.isEditable
-          .edit-icon-wrapper(onclick=`editRegion(${JSON.stringify(options.data)})`)
+          .edit-icon-wrapper(onclick=`editRegion(${JSON.stringify(options.data)}, '/admin/home/regions/edit')`)
             include ../../public/images/icons/admin/pencil.svg
             
     #regions-info__card__body
       p#region-info-text 
-        | This will be the ultimate stuff and the content will go here
 
-    // Add CSS for positioning and hover effect
     style.
       .header {
         display: flex;
@@ -41,4 +39,4 @@ mixin regions-info-card(options = {data:{}, isEditable: false})
     });
   
   if options.isEditable
-    script(type="module" src="/javascripts/admin/home-regions.js")
+    script(type="module" src="/javascripts/admin/home-cards.js")

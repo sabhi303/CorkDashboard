@@ -4,7 +4,7 @@ mixin about-cards(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASH
       h1.header
         span= options.header
         if options.isEditable
-          .edit-icon-wrapper(onclick=`editHeader(${JSON.stringify(options)})`)
+          .edit-icon-wrapper(onclick=`editHeader(${JSON.stringify(options)}, '/admin/home/edit')`)
             include ../../public/images/icons/admin/pencil.svg
     if options.twitterHandle
       #about-cork-dashboard__twitter
@@ -13,7 +13,6 @@ mixin about-cards(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASH
       p !{options.description}
       p !{options.additionalInfo}
 
-    // Add CSS for positioning and hover effect
     style.
        .header {
             display: flex;
