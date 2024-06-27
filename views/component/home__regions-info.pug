@@ -1,0 +1,20 @@
+mixin regions-info-card(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASHBOARD', twitterHandle: '@corkdashboard', description: '', additionalInfo: '', isEditable: false})
+  #regions-info__card.home__about__card
+    #regions-info__card__header
+        h1#local__title
+    #regions-info__card__body
+        p 
+            span#local__text-1 
+            |  covering an area of 
+            span#local__area
+
+        p The population determined by the census of 2016 was  
+            span#local__curPopulation 
+            | , compared to 
+            span#local__prePopulation
+            |  in 2011. This was 
+            span#local__PopChange 
+            | . 
+            span#local__text-2
+
+        p See more in our <a href='/themes#demographics'>Demographics Theme</a>

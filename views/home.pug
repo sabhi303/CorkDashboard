@@ -4,7 +4,8 @@ include component/home__card-chart
 include component/home__card-indicator
 
 //- abhi
-include component/home_about_cards
+include component/home__about_cards
+include component/home__regions-info
 
 block append head
   //- link(rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" )
@@ -168,29 +169,13 @@ block content
     #regions-info.home__about
       #regions-info__map
         svg#map
+        //- so here as well, I need to add the content from my db reading so that it will be accessible :)
+        //- let's see how can I achieve that
       //- #regions-info_flex
       #regions-info__cta SELECT A COUNCIL ON THE MAP TO LEARN MORE 
       #regions-info__cta-arrow 
         <svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" ></path></svg>
-      #regions-info__card.home__about__card
-        #regions-info__card__header
-          h1#local__title 
-        #regions-info__card__body
-          p 
-            span#local__text-1 
-            |  covering an area of 
-            span#local__area
-
-          p The population determined by the census of 2016 was  
-            span#local__curPopulation 
-            | , compared to 
-            span#local__prePopulation
-            |  in 2011. This was 
-            span#local__PopChange 
-            | . 
-            span#local__text-2
-
-          p See more in our <a href='/themes#demographics'>Demographics Theme</a> 
+      +regions-info-card
   each card in aboutCards
     +about-cards({
         id: card.id,
