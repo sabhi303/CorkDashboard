@@ -1,20 +1,44 @@
-mixin regions-info-card(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASHBOARD', twitterHandle: '@corkdashboard', description: '', additionalInfo: '', isEditable: false})
+mixin regions-info-card(options = {data:{}, isEditable: false})
   #regions-info__card.home__about__card
-    #regions-info__card__header
-        h1#local__title
+    #regions-info__card__header.header
+      div(style="display: flex; align-items: center;")
+        h1#local__title(style="flex: 1;")
+        h1#irish__title
+        if options.isEditable
+          .edit-icon-wrapper(onclick=`editRegion(${JSON.stringify(options.data)})`)
+            include ../../public/images/icons/admin/pencil.svg
+            
     #regions-info__card__body
-        p 
-            span#local__text-1 
-            |  covering an area of 
-            span#local__area
+      p#region-info-text 
+        | This will be the ultimate stuff and the content will go here
 
-        p The population determined by the census of 2016 was  
-            span#local__curPopulation 
-            | , compared to 
-            span#local__prePopulation
-            |  in 2011. This was 
-            span#local__PopChange 
-            | . 
-            span#local__text-2
+    // Add CSS for positioning and hover effect
+    style.
+      .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
 
-        p See more in our <a href='/themes#demographics'>Demographics Theme</a>
+      .edit-icon-wrapper {
+        margin-left: 10px;
+        display: flex;
+        cursor: pointer;
+        transition: transform 0.2s, color 0.2s;
+      }
+
+      .edit-icon-wrapper:hover {
+        color: #007BFF;
+      }
+
+      // Additional CSS for .header class if needed
+      .header h1#local__title {
+        margin-right: 10px;
+      }
+
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeMap('map', 'regions-info__card', '/images/home/CorkMap_Unselected.svg', !{JSON.stringify(options.data)});
+    });
+  
+  if options.isEditable
+    script(type="module" src="/javascripts/admin/home-regions.js")

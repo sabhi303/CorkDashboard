@@ -1,6 +1,7 @@
 'use strict';
 
-export function editHeader(options) {
+export function editRegion(data) {
+    
     // Create the overlay element
     const overlay = document.createElement('div');
     overlay.classList.add('popup-overlay');
@@ -9,6 +10,14 @@ export function editHeader(options) {
     const popupForm = document.createElement('div');
     popupForm.classList.add('popup-form');
 
+    const regionName = document.getElementById("local__title").textContent.trim();
+    var options;
+    data.forEach(element => {
+      if (element.id == regionName){
+        options = element;
+      }
+    });
+    
     // Initialize form HTML
     let formHTML = `
         <h2>Edit Information</h2>
@@ -263,4 +272,4 @@ export function editHeader(options) {
     
 }
 
-window.editHeader = editHeader;
+window.editRegion = editRegion;
