@@ -13,7 +13,7 @@ export async function main () {
     'https://statbank.cso.ie/StatbankServices/StatbankServices.svc/jsonservice/responseinstance/'
   // CNA13: Annual Rate of Population Increase by Sex, Province or County, CensusYear and Statistic
   const TABLE_CODE = 'CNA13'
-  const STATIC_DATA_URL = '../data/static/CNA13.json'
+  const STATIC_DATA_URL = '/data/static/CNA13.json'
 
   const STATS = ['Population (Number)'] // these will break out to individual charts
 
