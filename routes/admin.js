@@ -114,7 +114,6 @@ router.post("/home/regions/edit", async function (req, res, next) {
 
 /* Edit Themes page of the Dashboard */
 
-
 const Themes = require("../models/Theme");
 
 // Render the editable homepage
@@ -133,21 +132,16 @@ router.get("/themes", async function (req, res, next) {
   }
 });
 
-
 // Themes Header
-async function updatedThemesHeader(updatedData) {
+async function updateThemesHeader(updatedData) {
   try {
     const { id, ...updateFields } = updatedData;
-    const result = await Themes.findOneAndUpdate(
-      { id: id },
-      updateFields,
-      {
-        new: true,
-      }
-    );
+    const result = await Themes.findOneAndUpdate({ id: id }, updateFields, {
+      new: true,
+    });
     return result;
   } catch (error) {
-    throw new Error("Error updating the about card: " + error.message);
+    throw new Error("Error updating the Themes header: " + error.message);
   }
 }
 
@@ -155,7 +149,7 @@ router.post("/themes/header/edit", async function (req, res, next) {
   try {
     const updatedData = req.body;
 
-    const result = await updatedThemesHeader(updatedData);
+    const result = await updateThemesHeader(updatedData);
 
     if (result) {
       res.status(200).send({ message: "Update successful", data: result });
@@ -166,7 +160,53 @@ router.post("/themes/header/edit", async function (req, res, next) {
     console.error("Error updating the home page content", error);
     res.status(500).send({ message: "Internal Server Error" });
   }
-})
+});
+
+async function updateThemesChartInfo(updatedData) {
+  try {
+    const { id, parent_id, title, description } = updatedData;
+
+    const result = await Themes.findOneAndUpdate(
+      { id: parent_id, "charts.id": id },
+      {
+        $set: { "charts.$.description": description, "charts.$.title": title },
+      },
+      {
+        new: true,
+      }
+    );
+
+    // const { parent_id, id, description } = updatedData;
+
+    // const result = await Themes.findOneAndUpdate(
+    //   { id: parent_id, "charts.id": chartId },
+    //   { $set: { "charts.$.description": description } },
+    //   {
+    //     new: true,
+    //   }
+    // );
+    return result;
+  } catch (error) {
+    throw new Error("Error updating the Chart Info: " + error.message);
+  }
+}
+
+router.post("/themes/chartinfo/edit", async function (req, res, next) {
+  try {
+    const updatedData = req.body;
+
+    const result = await updateThemesChartInfo(updatedData);
+
+    if (result) {
+      res.status(200).send({ message: "Update successful", data: result });
+    } else {
+      res.status(404).send({ message: "Record not found" });
+    }
+  } catch (error) {
+    console.error("Error updating the home page content", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
 
 // I will put all the admin editable stuff here instead and all through the [post] requests
 // let's see how this goes

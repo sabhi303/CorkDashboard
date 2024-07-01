@@ -33,6 +33,7 @@ block content
             each chart in theme.charts
                 +theme__text-chart({
                     id: chart.id,
+                    parent_id: theme.id,
                     sources: chart.sources,
                     title: chart.title,
                     description: chart.description,

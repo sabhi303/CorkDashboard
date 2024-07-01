@@ -17,7 +17,7 @@ export function editHeader(options, api) {
 
   // Dynamically generate form fields based on options
   for (const [key, value] of Object.entries(options)) {
-    if (key !== "id" && key !== "isEditable") {
+    if (key !== "id" && key !== "isEditable" && key !== "parent_id") {
       if (key === "description" || key === "additionalInfo") {
         formHTML += `
                     <div class="form-group">
@@ -114,6 +114,12 @@ export function editHeader(options, api) {
         // Collect form values
         const formData = {};
         formData["id"] = options.id || options._id; // this or that :)
+
+        // This is for Themes Chart Info Specifically,
+        if (options.hasOwnProperty("parent_id")) {
+          formData["parent_id"] = options.parent_id;
+        }
+
         for (const [key, value] of Object.entries(options)) {
           if (key === "description" || key === "additionalInfo") {
             formData[key] = quillEditors[key].root.innerHTML;
@@ -184,7 +190,7 @@ export function editHeader(options, api) {
             justify-content: center;
             align-items: center;
             overflow: auto;
-            z-index: 1000;
+            z-index: 10000;
         }
         .popup-form {
             background: #fff;
@@ -293,13 +299,7 @@ export function editRegion(data, api) {
   editHeader(options, api);
 }
 
-
-export function editThemesHeader(data, api){
-  // just logging in for starters
-  // I just need titles and stuff so
-  // delete data[charts];
-  console.log(data);
-  console.log(api);
+export function editThemesHeader(data, api) {
   editHeader(data, api);
 }
 
@@ -318,6 +318,8 @@ export function editThemesChartInfo(data, api) {
       delete data[key];
     }
   }
+
+  console.log(data);
 
   editHeader(data, api);
 }

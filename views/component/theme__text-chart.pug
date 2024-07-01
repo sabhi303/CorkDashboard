@@ -7,7 +7,7 @@ mixin theme__text-chart(options = {id:'', sources:'', title:'', description:'', 
     .theme__text-chart__title
       h1= options.title || ''
       if options.isEditable
-          .edit-icon-wrapper(onclick=`editThemesChartInfo(${JSON.stringify(options)}, '/admin/home/edit')`)
+          .edit-icon-wrapper(onclick=`editThemesChartInfo(${JSON.stringify(options)}, '/admin/themes/chartinfo/edit')`)
             include ../../public/images/icons/admin/pencil.svg
     .theme__text-chart__text
       .theme__text-chart__description!= options.description || ''
