@@ -304,9 +304,7 @@ export function editThemesHeader(data, api) {
 }
 
 export function editThemesChartInfo(data, api) {
-  // for now just considering the text changes, so let's see
 
-  // I don't want any chart related stuff so,
   for (let key in data) {
     if (
       data.hasOwnProperty(key) &&

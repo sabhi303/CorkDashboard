@@ -5,7 +5,6 @@ const regionSchema = new Schema({
   id: {
     type: String,
     required: true,
-    unique: true
   },
   English: {
     type: String,

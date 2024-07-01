@@ -175,16 +175,6 @@ async function updateThemesChartInfo(updatedData) {
         new: true,
       }
     );
-
-    // const { parent_id, id, description } = updatedData;
-
-    // const result = await Themes.findOneAndUpdate(
-    //   { id: parent_id, "charts.id": chartId },
-    //   { $set: { "charts.$.description": description } },
-    //   {
-    //     new: true,
-    //   }
-    // );
     return result;
   } catch (error) {
     throw new Error("Error updating the Chart Info: " + error.message);
