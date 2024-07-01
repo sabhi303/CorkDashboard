@@ -74,14 +74,17 @@ router.post("/home/edit", async function (req, res, next) {
   }
 });
 
-
 /* Regions */
 async function updateRegionsData(updatedData) {
   try {
     const { id, ...updateFields } = updatedData;
-    const result = await RegionsInfo.findOneAndUpdate({ id: id }, updateFields, {
-      new: true,
-    });
+    const result = await RegionsInfo.findOneAndUpdate(
+      { id: id },
+      updateFields,
+      {
+        new: true,
+      }
+    );
     return result;
   } catch (error) {
     throw new Error("Error updating the about card: " + error.message);
@@ -104,6 +107,31 @@ router.post("/home/regions/edit", async function (req, res, next) {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
+/* ////////////////////// */
+
+// ---:-)
+
+/* Edit Themes page of the Dashboard */
+
+// Render the editable homepage
+/* GET themes page. */
+
+const Theme = require("../models/Theme");
+
+router.get("/themes", async function (req, res, next) {
+  try {
+    const themes = await Theme.find({});
+    console.log(themes);
+    res.render("themes/themes_updated", { themes, isEditable: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+});
+
+// I will put all the admin editable stuff here instead and all through the [post] requests
+// let's see how this goes
 
 /* ////////////////////// */
 

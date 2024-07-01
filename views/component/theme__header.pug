@@ -1,11 +1,38 @@
-mixin theme__header(options={id:'', title:'', description:'', moreinfo:'', scrollref:''})
+mixin theme__header(options={id:'', title:'', description:'', moreinfo:'', scrollref:'', isEditable: false})
   div(id=options.id 
     class="theme__header" 
     )
     .theme__header__content
-      .theme__header__title!=options.title
-      .theme__header__description!=options.description
-      .theme__header__info!=options.moreinfo
+      .theme__header__top
+          span.theme__header__title!= options.title
+          if options.isEditable
+              span.edit-icon-wrapper(onclick=`editTransportHeader(${JSON.stringify(options)}, '/admin/themes/edit')`)
+                  include ../../public/images/icons/admin/pencil.svg
+      .theme__header__description!= options.description
+      .theme__header__info!= options.moreinfo
     .theme__header__scroll-arrow
       button(type='button', onclick='document.getElementById("'+options.scrollref+'").scrollIntoView({alignTo: true, behavior: "smooth", block: "start"})') 
         <svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" ></path></svg>
+    style.
+       .theme__header__top {
+            display: flex;
+            align-items: center;
+        }
+
+        .theme__header__title {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .edit-icon-wrapper {
+            margin-left: 5px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .theme__header__title, .edit-icon-wrapper svg {
+            vertical-align: middle;
+        }
+
+  if options.isEditable
+    script(type="module" src="/javascripts/admin/home-cards.js")

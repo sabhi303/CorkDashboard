@@ -27,7 +27,8 @@ block content
                 title: theme.title,
                 description: theme.description,
                 moreinfo: theme.moreinfo,
-                scrollref: theme.scrollref
+                scrollref: theme.scrollref,
+                isEditable: isEditable
             })
             each chart in theme.charts
                 +theme__text-chart({
@@ -38,7 +39,8 @@ block content
                     chartinfo: chart.chartinfo,
                     chartids: chart.chartids,
                     buttons: chart.buttons,
-                    plotoptions: chart.plotoptions
+                    plotoptions: chart.plotoptions,
+                    isEditable: isEditable
                 })
 
 block append scripts

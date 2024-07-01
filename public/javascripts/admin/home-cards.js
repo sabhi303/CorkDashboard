@@ -1,43 +1,52 @@
-'use strict';
+"use strict";
 
-export function editHeader(options,api) {
-    // Create the overlay element
-    const overlay = document.createElement('div');
-    overlay.classList.add('popup-overlay');
+export function editHeader(options, api) {
+  // Create the overlay element
+  const overlay = document.createElement("div");
+  overlay.classList.add("popup-overlay");
 
-    // Create the form container
-    const popupForm = document.createElement('div');
-    popupForm.classList.add('popup-form');
+  // Create the form container
+  const popupForm = document.createElement("div");
+  popupForm.classList.add("popup-form");
 
-    // Initialize form HTML
-    let formHTML = `
+  // Initialize form HTML
+  let formHTML = `
         <h2>Edit Information</h2>
         <form id="popupForm">
     `;
 
-    // Dynamically generate form fields based on options
-    for (const [key, value] of Object.entries(options)) {
-        if (key !== 'id' && key !== 'isEditable') {
-            if (key === 'description' || key === 'additionalInfo') {
-                formHTML += `
+  // Dynamically generate form fields based on options
+  for (const [key, value] of Object.entries(options)) {
+    if (key !== "id" && key !== "isEditable") {
+      if (key === "description" || key === "additionalInfo") {
+        formHTML += `
                     <div class="form-group">
-                        <label for="${key}">${key.replace(/([A-Z])/g, ' $1')}</label>
+                        <label for="${key}">${key.replace(
+          /([A-Z])/g,
+          " $1"
+        )}</label>
                         <div id="toolbar-${key}"></div>
                         <div id="${key}" class="quill-editor"></div>
                     </div>
                 `;
-            } else {
-                formHTML += `
+      } else {
+        formHTML += `
                     <div class="form-group">
-                        <label for="${key}">${key.replace(/([A-Z])/g, ' $1')}</label>
-                        <input type="text" id="${key}" name="${key}" value="${value}" placeholder="Enter ${key.replace(/([A-Z])/g, ' $1')}">
+                        <label for="${key}">${key.replace(
+          /([A-Z])/g,
+          " $1"
+        )}</label>
+                        <input type="text" id="${key}" name="${key}" value="${value}" placeholder="Enter ${key.replace(
+          /([A-Z])/g,
+          " $1"
+        )}">
                     </div>
                 `;
-            }
-        }
+      }
     }
+  }
 
-    formHTML += `
+  formHTML += `
             <div class="form-group">
                 <button type="submit">Submit</button>
                 <button type="button" id="cancelButton">Cancel</button>
@@ -45,107 +54,119 @@ export function editHeader(options,api) {
         </form>
     `;
 
-    // Set the form HTML
-    popupForm.innerHTML = formHTML;
+  // Set the form HTML
+  popupForm.innerHTML = formHTML;
 
-    // Append the form to the overlay
-    overlay.appendChild(popupForm);
+  // Append the form to the overlay
+  overlay.appendChild(popupForm);
 
-    // Append the overlay to the body
-    document.body.appendChild(overlay);
+  // Append the overlay to the body
+  document.body.appendChild(overlay);
 
-    // Add Quill editor script and stylesheet
-    const quillStylesheet = document.createElement('link');
-    quillStylesheet.rel = 'stylesheet';
-    quillStylesheet.href = 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+  // Add Quill editor script and stylesheet
+  const quillStylesheet = document.createElement("link");
+  quillStylesheet.rel = "stylesheet";
+  quillStylesheet.href = "https://cdn.quilljs.com/1.3.6/quill.snow.css";
 
-    const quillScript = document.createElement('script');
-    quillScript.src = 'https://cdn.quilljs.com/1.3.6/quill.js';
+  const quillScript = document.createElement("script");
+  quillScript.src = "https://cdn.quilljs.com/1.3.6/quill.js";
 
-    document.head.appendChild(quillStylesheet);
-    document.head.appendChild(quillScript);
+  document.head.appendChild(quillStylesheet);
+  document.head.appendChild(quillScript);
 
-    quillScript.onload = function() {
-        const quillEditors = {};
+  quillScript.onload = function () {
+    const quillEditors = {};
+    for (const [key, value] of Object.entries(options)) {
+      if (key === "description" || key === "additionalInfo") {
+        quillEditors[key] = new Quill(`#${key}`, {
+          theme: "snow",
+          modules: {
+            toolbar: [
+              [{ font: [] }, { size: [] }],
+              ["bold", "italic", "underline", "strike"],
+              [{ color: [] }, { background: [] }],
+              [{ script: "sub" }, { script: "super" }],
+              [{ header: "1" }, { header: "2" }, "blockquote", "code-block"],
+              [
+                { list: "ordered" },
+                { list: "bullet" },
+                { indent: "-1" },
+                { indent: "+1" },
+              ],
+              ["direction", { align: [] }],
+              ["link", "formula"],
+              ["clean"],
+            ],
+          },
+        });
+        quillEditors[key].root.innerHTML = value;
+      }
+    }
+
+    document
+      .getElementById("popupForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Display loading popup
+        const loadingOverlay = displayPopup("Loading...", true);
+
+        // Collect form values
+        const formData = {};
+        formData["id"] = options.id || options._id; // this or that :)
         for (const [key, value] of Object.entries(options)) {
-            if (key === 'description' || key === 'additionalInfo') {
-                quillEditors[key] = new Quill(`#${key}`, {
-                    theme: 'snow',
-                    modules: {
-                        toolbar: [
-                            [{ 'font': [] }, { 'size': [] }],
-                            ['bold', 'italic', 'underline', 'strike'],
-                            [{ 'color': [] }, { 'background': [] }],
-                            [{ 'script': 'sub' }, { 'script': 'super' }],
-                            [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
-                            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-                            ['direction', { 'align': [] }],
-                            ['link', 'formula'],
-                            ['clean']
-                        ]
-                    }
-                });
-                quillEditors[key].root.innerHTML = value;
+          if (key === "description" || key === "additionalInfo") {
+            formData[key] = quillEditors[key].root.innerHTML;
+          } else {
+            const inputElement = document.getElementById(key);
+            if (inputElement) {
+              formData[key] = inputElement.value;
             }
+          }
         }
 
-        document.getElementById('popupForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Display loading popup
-            const loadingOverlay = displayPopup('Loading...', true);
-
-            // Collect form values
-            const formData = {};
-            formData['id'] = options.id || options._id; // this or that :)
-            for (const [key, value] of Object.entries(options)) {
-                if (key === 'description' || key === 'additionalInfo') {
-                    formData[key] = quillEditors[key].root.innerHTML;
-                } else {
-                    const inputElement = document.getElementById(key);
-                    if (inputElement) {
-                        formData[key] = inputElement.value;
-                    }
-                }
-            }
-
-            // Send form data as POST request to API endpoint
-            fetch(api, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Remove loading popup
-                document.body.removeChild(loadingOverlay);
-                // Show success message
-                displayPopup('Success! Your changes have been saved.', false);
-                // Update the content on the page
-                updatePageContent(formData);
-                // Remove the overlay
-                document.body.removeChild(overlay);
-            })
-            .catch((error) => {
-                // Remove loading popup
-                document.body.removeChild(loadingOverlay);
-                // Show error message
-                displayPopup('Error! Something went wrong. Please try again.', false);
-            });
-        });
-
-        // Add event listener to the cancel button
-        document.getElementById('cancelButton').addEventListener('click', function() {
+        // Send form data as POST request to API endpoint
+        fetch(api, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Remove loading popup
+            document.body.removeChild(loadingOverlay);
+            // Show success message
+            displayPopup("Success! Your changes have been saved.", false);
+            // Update the content on the page
+            updatePageContent(formData);
             // Remove the overlay
             document.body.removeChild(overlay);
-        });
-    };
+          })
+          .catch((error) => {
+            // Remove loading popup
+            document.body.removeChild(loadingOverlay);
+            // Show error message
+            displayPopup(
+              "Error! Something went wrong. Please try again.",
+              false
+            );
+          });
+      });
 
-    // Add styles for the popup form and overlay
-    const styles = document.createElement('style');
-    styles.innerHTML = `
+    // Add event listener to the cancel button
+    document
+      .getElementById("cancelButton")
+      .addEventListener("click", function () {
+        // Remove the overlay
+        document.body.removeChild(overlay);
+      });
+  };
+
+  // Add styles for the popup form and overlay
+  const styles = document.createElement("style");
+  styles.innerHTML = `
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -229,51 +250,68 @@ export function editHeader(options,api) {
         }
     `;
 
-    document.head.appendChild(styles);
+  document.head.appendChild(styles);
 
-    function displayPopup(message, isLoading, overlayToRemove = null) {
-        const messageOverlay = document.createElement('div');
-        messageOverlay.classList.add('popup-overlay');
+  function displayPopup(message, isLoading, overlayToRemove = null) {
+    const messageOverlay = document.createElement("div");
+    messageOverlay.classList.add("popup-overlay");
 
-        const messageBox = document.createElement('div');
-        messageBox.classList.add('popup-message');
+    const messageBox = document.createElement("div");
+    messageBox.classList.add("popup-message");
 
-        messageBox.innerHTML = `<p>${message}</p>`;
-        messageOverlay.appendChild(messageBox);
-        document.body.appendChild(messageOverlay);
+    messageBox.innerHTML = `<p>${message}</p>`;
+    messageOverlay.appendChild(messageBox);
+    document.body.appendChild(messageOverlay);
 
-        if (!isLoading) {
-            setTimeout(() => {
-                document.body.removeChild(messageOverlay);
-                if (overlayToRemove) {
-                    document.body.removeChild(overlayToRemove);
-                }
-            }, 3000);
+    if (!isLoading) {
+      setTimeout(() => {
+        document.body.removeChild(messageOverlay);
+        if (overlayToRemove) {
+          document.body.removeChild(overlayToRemove);
         }
-
-        return messageOverlay;
+      }, 3000);
     }
 
+    return messageOverlay;
+  }
 
-    // Okay, here I need to do the thing
-    function updatePageContent(data) {
-        location.reload();
-        return false;
-    }
-    
+  // Okay, here I need to do the thing
+  function updatePageContent(data) {
+    location.reload();
+    return false;
+  }
 }
 
-
 export function editRegion(data, api) {
-    const regionName = document.getElementById("local__title").textContent.trim();
-    var options;
-    data.forEach((element) => {
-      if (element.id == regionName) {
-        options = element;
-      }
-    });
-    editHeader(options, api);
+  const regionName = document.getElementById("local__title").textContent.trim();
+  var options;
+  data.forEach((element) => {
+    if (element.id == regionName) {
+      options = element;
+    }
+  });
+  editHeader(options, api);
+}
+
+export function editThemesChartInfo(data, api) {
+  // for now just considering the text changes, so let's see
+
+  // I don't want any chart related stuff so,
+  for (let key in data) {
+    if (
+      data.hasOwnProperty(key) &&
+      (key.includes("chart") ||
+        key.includes("button") ||
+        key.includes("sources") ||
+        key.includes("plotoptions"))
+    ) {
+      delete data[key];
+    }
+  }
+
+  editHeader(data, api);
 }
 
 window.editHeader = editHeader;
 window.editRegion = editRegion;
+window.editThemesChartInfo = editThemesChartInfo;
