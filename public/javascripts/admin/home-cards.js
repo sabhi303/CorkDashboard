@@ -293,6 +293,16 @@ export function editRegion(data, api) {
   editHeader(options, api);
 }
 
+
+export function editThemesHeader(data, api){
+  // just logging in for starters
+  // I just need titles and stuff so
+  // delete data[charts];
+  console.log(data);
+  console.log(api);
+  editHeader(data, api);
+}
+
 export function editThemesChartInfo(data, api) {
   // for now just considering the text changes, so let's see
 
@@ -314,4 +324,5 @@ export function editThemesChartInfo(data, api) {
 
 window.editHeader = editHeader;
 window.editRegion = editRegion;
+window.editThemesHeader = editThemesHeader;
 window.editThemesChartInfo = editThemesChartInfo;

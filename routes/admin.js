@@ -114,6 +114,9 @@ router.post("/home/regions/edit", async function (req, res, next) {
 
 /* Edit Themes page of the Dashboard */
 
+
+const Themes = require("../models/Theme");
+
 // Render the editable homepage
 /* GET themes page. */
 
@@ -129,6 +132,41 @@ router.get("/themes", async function (req, res, next) {
     res.status(500).send("Server Error");
   }
 });
+
+
+// Themes Header
+async function updatedThemesHeader(updatedData) {
+  try {
+    const { id, ...updateFields } = updatedData;
+    const result = await Themes.findOneAndUpdate(
+      { id: id },
+      updateFields,
+      {
+        new: true,
+      }
+    );
+    return result;
+  } catch (error) {
+    throw new Error("Error updating the about card: " + error.message);
+  }
+}
+
+router.post("/themes/header/edit", async function (req, res, next) {
+  try {
+    const updatedData = req.body;
+
+    const result = await updatedThemesHeader(updatedData);
+
+    if (result) {
+      res.status(200).send({ message: "Update successful", data: result });
+    } else {
+      res.status(404).send({ message: "Record not found" });
+    }
+  } catch (error) {
+    console.error("Error updating the home page content", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+})
 
 // I will put all the admin editable stuff here instead and all through the [post] requests
 // let's see how this goes

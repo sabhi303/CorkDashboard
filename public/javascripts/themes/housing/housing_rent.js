@@ -28,13 +28,13 @@ async function main () {
     if (json) {
       removeSpinner('chart-' + chartDivIds[0])
     }
-    // console.log(json.result)
+    // // console.log(json.result)
     const dataset = JSONstat(json).Dataset(0)
     const datasetabhi = JSONstat(jsonabhi.result).Dataset(0)
 
     
 
-    // console.log(dataset)
+    // // console.log(dataset)
 
     const dimensions = dataset.Dimension().map(dim => {
       return dim.label
@@ -42,31 +42,31 @@ async function main () {
     const dimensionsabhi = datasetabhi.Dimension().map(dim  => {
       return dim.label
     })
-    console.log(dimensions)
-    console.log(dimensionsabhi)
+    // console.log(dimensions)
+    // console.log(dimensionsabhi)
     const categoriesBeds = dataset.Dimension(dimensions[0]).Category().map(c => {
       return c.label
     })
     const categoriesBedsabhi = dataset.Dimension(dimensionsabhi[2]).Category().map(c => {
       return c.label
     })
-    console.log(categoriesBeds)
-    console.log(categoriesBedsabhi)
+    // console.log(categoriesBeds)
+    // console.log(categoriesBedsabhi)
 
     const categoriesType = dataset.Dimension(dimensions[1]).Category().map(c => {
       return c.label
     })
-    console.log(categoriesType)
+    // console.log(categoriesType)
     //
     const categoriesLocation = dataset.Dimension(dimensions[2]).Category().map(c => {
       return c.label
     })
-    console.log(categoriesLocation)
+    // console.log(categoriesLocation)
 
     const categoriesStat = dataset.Dimension(dimensions[4]).Category().map(c => {
       return c.label
     })
-    console.log(categoriesStat)
+    // console.log(categoriesStat)
 
     const rentTable = dataset.toTable(
       { type: 'arrobj' },
@@ -82,7 +82,7 @@ async function main () {
         }
       })
 
-    // console.log(rentTable)
+    // // console.log(rentTable)
     //
     const rent = {
       elementId: 'chart-' + chartDivIds[0],
@@ -98,7 +98,7 @@ async function main () {
     }
     //
 
-    // console.log(rent)
+    // // console.log(rent)
     const rentChart = new BCDMultiLineChart(rent)
 
     // const rentByBeds = {
@@ -152,14 +152,14 @@ async function main () {
       redraw()
     })
   } catch (e) {
-    console.log('Error creating rent charts')
-    console.log(e)
+    // console.log('Error creating rent charts')
+    // console.log(e)
     removeSpinner('chart-' + chartDivIds[0])
     const eMsg = (e instanceof TimeoutError) ? e : 'An error occured'
     const errBtnID = addErrorMessageButton('chart-' + chartDivIds[0], eMsg)
-    // console.log(errBtnID)
+    // // console.log(errBtnID)
     d3.select(`#${errBtnID}`).on('click', function () {
-      // console.log('retry')
+      // // console.log('retry')
       removeErrorMessageButton('chart-' + chartDivIds[0])
       main()
     })

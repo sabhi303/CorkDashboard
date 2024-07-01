@@ -6,7 +6,7 @@ mixin theme__header(options={id:'', title:'', description:'', moreinfo:'', scrol
       .theme__header__top
           span.theme__header__title!= options.title
           if options.isEditable
-              span.edit-icon-wrapper(onclick=`editTransportHeader(${JSON.stringify(options)}, '/admin/themes/edit')`)
+              span.edit-icon-wrapper(onclick=`editThemesHeader(${JSON.stringify(options)}, '/admin/themes/header/edit')`)
                   include ../../public/images/icons/admin/pencil.svg
       .theme__header__description!= options.description
       .theme__header__info!= options.moreinfo
