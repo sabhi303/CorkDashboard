@@ -322,7 +322,7 @@ export function editThemesChartInfo(data, api) {
 
 
 export function editQueries(data, api){
-  // Changed the database and models so no changes needed here
+  delete data["linkhref"];
   editHeader(data, api);
 }
 
