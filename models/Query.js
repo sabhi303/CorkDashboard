@@ -1,18 +1,9 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const queryLinkSchema = new Schema({
-  href: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  }
-});
 
 const querySchema = new Schema({
+  id: String,
   title: {
     type: String,
     required: true
@@ -21,10 +12,14 @@ const querySchema = new Schema({
     type: String,
     required: true
   },
-  links: {
-    type: [queryLinkSchema],
+  linkname: {
+    type: String,
     required: true
-  }
+  },
+  linkhref: {
+    type: String,
+    required: true
+  },
 });
 
 const Query = mongoose.model('Query', querySchema, 'queries');

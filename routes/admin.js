@@ -198,8 +198,62 @@ router.post("/themes/chartinfo/edit", async function (req, res, next) {
   }
 });
 
-// I will put all the admin editable stuff here instead and all through the [post] requests
-// let's see how this goes
+/* ////////////////////// */
+
+// ---:-)
+
+/* Edit Themes page of the Dashboard */
+
+const QueriesModel = require("../models/Query");
+
+// Render the editable homepage
+/* GET themes page. */
+
+/* Queries Home Page */
+router.get("/queries", async function (req, res, next) {
+  try {
+    const Queries = await QueriesModel.find({});
+    res.render("queries/queries", {
+      title: "Cork Dashboard | Queries | Admin",
+      queries: Queries,
+      isEditable: true
+    });
+  } catch (error) {
+    console.error("Error rendering the Admin Queries page", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+// Queries Header
+async function updateQueries(updatedData) {
+  try {
+    const { id, ...updateFields } = updatedData;
+    const result = await QueriesModel.findOneAndUpdate({ id: id }, updateFields, {
+      new: true,
+    });
+    return result;
+  } catch (error) {
+    throw new Error("Error updating the Themes header: " + error.message);
+  }
+}
+
+router.post("/queries/edit", async function (req, res, next) {
+  try {
+    const updatedData = req.body;
+
+    const result = await updateQueries(updatedData);
+
+    if (result) {
+      res.status(200).send({ message: "Update successful", data: result });
+    } else {
+      res.status(404).send({ message: "Record not found" });
+    }
+  } catch (error) {
+    console.error("Error updating theQueries page content", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
 
 /* ////////////////////// */
 

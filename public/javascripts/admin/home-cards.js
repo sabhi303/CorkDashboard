@@ -317,8 +317,12 @@ export function editThemesChartInfo(data, api) {
     }
   }
 
-  console.log(data);
+  editHeader(data, api);
+}
 
+
+export function editQueries(data, api){
+  // Changed the database and models so no changes needed here
   editHeader(data, api);
 }
 
@@ -326,3 +330,4 @@ window.editHeader = editHeader;
 window.editRegion = editRegion;
 window.editThemesHeader = editThemesHeader;
 window.editThemesChartInfo = editThemesChartInfo;
+window.editQueries = editQueries;

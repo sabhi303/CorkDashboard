@@ -1,8 +1,32 @@
-mixin card-sub-home(options = {id: '', title: 'Title', icon: '', description: 'Description', links: []})
+mixin card-sub-home(options = {id: '', title: 'Title', icon: '', description: 'Description', linkname:"", linkhref:"", isEditable: false})
   .sub-home__card
     .card__header
       h1.card__title= options.title
+      span= options.header
+      if options.isEditable
+        .edit-icon-wrapper(onclick=`editQueries(${JSON.stringify(options)}, '/admin/queries/edit')`)
+            include ../../public/images/icons/admin/pencil.svg
     .card__body!= options.description
     .card__links
-      each l in options.links
-        a(href=l.href)= l.name
+        a(href=options.linkhref)= options.linkname
+    
+    if options.isEditable
+      style.
+       .header {
+            display: flex;
+            align-items: center;
+        }
+
+        .edit-icon-wrapper {
+            margin-left: 10px;
+            display: flex;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .edit-icon-wrapper:hover {
+            transform: scale(1.2);
+            color: #007BFF;
+        }
+
+  if options.isEditable
+    script(type="module" src="/javascripts/admin/home-cards.js")

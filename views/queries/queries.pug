@@ -24,11 +24,14 @@ block content
           each query in queries
             .carousel-cell
               +card-sub-home({
+                id: query.id,
                 title: query.title,
                 description: query.description,
-                links: query.links
+                linkname: query.linkname,
+                linkhref: query.linkhref,
+                isEditable: isEditable
               })
 
 block append scripts
   //- script(src="https://unpkg.com/flickity@2/dist/flickity.pkgd.js" type="text/javascript")
-  script(src="./lib/flickity.pkgd.min.js" type="text/javascript")
+  script(src="/lib/flickity.pkgd.min.js" type="text/javascript")
