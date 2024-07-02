@@ -13,6 +13,7 @@ mixin about-cards(options = {id: 'about-cork-dashboard', header: 'ABOUT THE DASH
       p !{options.description}
       p !{options.additionalInfo}
 
+  if options.isEditable
     style.
        .header {
             display: flex;
