@@ -94,7 +94,7 @@ block content
                     })
                 .accordion__content.open 
                     #query-group-description__content 
-                        p The group classifications shown on the map are the result of similarities found in data through the analysis of 35 variables from the census results. The associated values displayed in the chart are considered under the themes of (i) age and marital status; (ii) ethnicity; (iii) housing; (iv) socio-economic group; (iv) education; (v) commuting; (vi) occupation type; (vii) motor car availability and (viii) internet access. 
+                        p something where it filters by id should be here
             #query-heatmap
                 +accordion({
                     id: "accordion-heatmap",
@@ -118,3 +118,13 @@ block append scripts
     //- script(src="/javascripts/charts/plotly/plotly_config_tools.js" type="text/javascript")  
     script(src="/javascripts/queries/geodemos/geodemos.js" type="module" ) 
     script(src='/javascripts/modules/accordion.js' type="text/javascript" )
+    script(type='text/javascript').
+        document.addEventListener('DOMContentLoaded', function() {
+            var groupDescriptions = !{JSON.stringify(geodemos)};
+            
+            if (window.mainGeoDemos) {
+                window.mainGeoDemos(groupDescriptions);
+            } else {
+                console.error('mainGeoDemos is not defined');
+            }
+        });
