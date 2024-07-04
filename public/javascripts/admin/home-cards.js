@@ -325,14 +325,10 @@ export function editQueries(data, api) {
 }
 
 export function editGeoDemosGroupInfo(data, api = "") {
-  console.log("data:", data);
-  console.log("api:", api);
   delete data["_id"];
   editHeader(data, api);
 }
 export function editGeoDemosClusterInfo(data, api = "") {
-  console.log("data:", data);
-  console.log("api:", api);
   delete data["_id"];
   editHeader(data, api);
 }
