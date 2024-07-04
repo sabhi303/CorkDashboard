@@ -1,0 +1,64 @@
+extends ../layout
+
+block append head
+    title Login Page
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel="stylesheet" href="/stylesheets/lib/flickity.min.css")
+    link(rel="stylesheet" href="/stylesheets/home/home.css")
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+    style.
+        .carousel-cell {
+            margin: 100px auto;
+            margin-top: -1% !important;
+            align-items: center;
+        }
+        #card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+            width: 30%;
+            max-height: 80%;
+        }
+        .card-header {
+            background: transparent;
+            border-bottom: none;
+        }
+        .card-container {
+            margin: 100px auto;
+        }
+        .btn-primary {
+            background: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+block content
+    #home-page  
+        .colour-banner 
+        #hero 
+            #hero-grid
+                #hero-title
+                    #hero-title__text--top CORK
+                    #hero-title__text--bottom DASHBOARD
+
+                #hero-carousel
+                    <div class="carousel" data-flickity='{ "freeScroll": true, "wrapAround": false, "freeScrollFriction": 0.05,"selectedAttraction": 0.05, "cellSelector": ".carousel-cell", "cellAlign": "left", "percentPosition": false, "pageDots": true, "adaptiveHeight": false, "setGallerySize": false}'>
+                        div#card.carousel-cell
+                            .card-header.text-center
+                            h3 Login to Your Account
+                            .card-body
+                                form(action='/login' method='POST')
+                                    .form-group
+                                    label(for='username') Username
+                                    input#username.form-control(type='text' name='username' placeholder='Enter your username' required)
+                                    .form-group
+                                    label(for='password') Password
+                                    input#password.form-control(type='password' name='password' placeholder='Enter your password' required)
+                                    .form-group.text-center
+                                    button.btn.btn-primary(type='submit') Login
+                                .card-footer.text-center
+                                p Don't have an account?
+                                a(href='/register' class='btn btn-link') Register Here

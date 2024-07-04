@@ -76,6 +76,7 @@ const tools = require('./routes/tools')
 const portal = require('./routes/portal')
 const api = require('./routes/api')
 const admin = require('./routes/admin')
+const auth = require('./routes/auth')
 
 // view engine setup
 app.set('views', [path.join(__dirname, 'views'),
@@ -96,6 +97,8 @@ app.use('/tools', tools)
 app.use('/portal', portal)
 app.use('/api', api)
 app.use('/admin', admin)
+app.use('/auth', auth)
+
 
 // //additional functionality from node modules
 
