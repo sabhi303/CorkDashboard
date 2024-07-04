@@ -11,27 +11,27 @@ router.get("/login", (req, res, next) => {
   res.render("auth/login");
 });
 
-router.post("/login", async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    // Find user by username (assuming username is unique)
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).send("User not found");
-    }
-    if (user.password !== password) {
-      return res.status(401).send("Incorrect password");
+      return res.status(404).send('User not found');
     }
 
-    // Authentication successful
-    // You can store user session or JWT token for subsequent requests
+    // Compare the provided password with the hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
 
-    res.send("Login successful");
+    if (!isMatch) {
+      return res.status(401).send('Incorrect password');
+    }
+
+    res.send('Login successful');
   } catch (err) {
     console.error(err);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send('Internal Server Error');
   }
 });
 
