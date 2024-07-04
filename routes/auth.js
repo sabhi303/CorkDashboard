@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const bcrypt = require("bcrypt");
 
 // all the logic will go here :-)
 
@@ -59,8 +60,16 @@ router.post("/register", async (req, res, next) => {
       return res.status(409).send("User already exists");
     }
 
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     // Create a new user
-    const newUser = new User({ name, email, password, updates });
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+      updates: updates === "on",
+    });
     await newUser.save();
 
     // Registration successful
