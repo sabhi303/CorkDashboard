@@ -28,14 +28,16 @@ const BASIC_LAYOUT = Object.assign({}, getBasicLayout());
 
 // const CHART_HEIGHT = 400
 
-export async function mainGeoDemos(groupDescriptions) {
+export async function mainGeoDemos(groupDescriptions, isEditable = false) {
   try {
-
     // Initial :)
-    const groupDescriptionText = groupDescriptions.find(
-      ({ id }) => id == "all"
-    );
-    updateGroupDescription(groupDescriptionText.description);
+    updateGroupDescription(groupDescriptions, "all", isEditable);
+
+    // cluster
+    const content = document.getElementById("query-heatmap__text");
+    content.innerHTML = groupDescriptions.find(
+      ({ id }) => id == "cluster"
+    ).description;
 
     // Add map
     const minZoom = 8;
@@ -109,10 +111,7 @@ export async function mainGeoDemos(groupDescriptions) {
           Plotly.react("chart-geodemos", chartTraces, chartLayout);
           // 'all' && cb.attr("src") == '/images/icons/ui/Icon_eye_selected.svg')
         }
-        const groupDescriptionText = groupDescriptions.find(
-          ({ id }) => id == groupNo
-        );
-        updateGroupDescription(groupDescriptionText.description);
+        updateGroupDescription(groupDescriptions, groupNo, isEditable);
       });
     // Heatmap
 
@@ -295,9 +294,19 @@ async function getChartLayout() {
 
 /* Description functions */
 
-function updateGroupDescription(contentText) {
+function updateGroupDescription(groupDescriptions, groupNo, isEditable) {
+  const groupDescriptionText = groupDescriptions.find(
+    ({ id }) => id == groupNo
+  );
+
   const content = document.getElementById("query-group-description__content");
-  content.innerHTML = contentText;
+  content.innerHTML = ""; // Clear the content
+
+  if (isEditable) {
+    getEditablePencilIcon();
+  }
+  // Now add the contentText
+  content.insertAdjacentHTML("beforeend", groupDescriptionText.description);
 }
 
 /* Heatmap functions */
