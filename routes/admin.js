@@ -205,6 +205,7 @@ router.post("/themes/chartinfo/edit", async function (req, res, next) {
 /* Edit Themes page of the Dashboard */
 
 const QueriesModel = require("../models/Query");
+const GeoDemosModel = require("../models/GeoDemos");
 
 // Render the editable homepage
 /* GET themes page. */
@@ -216,7 +217,7 @@ router.get("/queries", async function (req, res, next) {
     res.render("queries/queries", {
       title: "Cork Dashboard | Queries | Admin",
       queries: Queries,
-      isEditable: true
+      isEditable: true,
     });
   } catch (error) {
     console.error("Error rendering the Admin Queries page", error);
@@ -224,14 +225,17 @@ router.get("/queries", async function (req, res, next) {
   }
 });
 
-
 // Queries Header
 async function updateQueries(updatedData) {
   try {
     const { id, ...updateFields } = updatedData;
-    const result = await QueriesModel.findOneAndUpdate({ id: id }, updateFields, {
-      new: true,
-    });
+    const result = await QueriesModel.findOneAndUpdate(
+      { id: id },
+      updateFields,
+      {
+        new: true,
+      }
+    );
     return result;
   } catch (error) {
     throw new Error("Error updating the Themes header: " + error.message);
@@ -251,6 +255,49 @@ router.post("/queries/edit", async function (req, res, next) {
     }
   } catch (error) {
     console.error("Error updating theQueries page content", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
+// Queries GeoDemos
+async function updateGeoDemos(updatedData) {
+  try {
+    const { id, ...updateFields } = updatedData;
+    const result = await GeoDemosModel.findOneAndUpdate(
+      { id: id },
+      updateFields,
+      {
+        new: true,
+      }
+    );
+    return result;
+  } catch (error) {
+    throw new Error("Error updating the Themes header: " + error.message);
+  }
+}
+
+router.get("/queries/geodemos", async function (req, res, next) {
+  const GeoDemos = await GeoDemosModel.find({});
+  res.render("queries/geodemos", {
+    title: "Query: Geodemographics",
+    page: "",
+    geodemos: GeoDemos,
+    isEditable: true,
+  });
+});
+
+router.post("/queries/geodemos/edit", async function (req, res, next) {
+  try {
+    const updatedData = req.body;
+    const result = await updateGeoDemos(updatedData);
+
+    if (result) {
+      res.status(200).send({ message: "Update successful", data: result });
+    } else {
+      res.status(404).send({ message: "Record not found" });
+    }
+  } catch (error) {
+    console.error("Error updating the GeoDemos page content", error);
     res.status(500).send({ message: "Internal Server Error" });
   }
 });

@@ -35,9 +35,20 @@ export async function mainGeoDemos(groupDescriptions, isEditable = false) {
 
     // cluster
     const content = document.getElementById("query-heatmap__text");
-    content.innerHTML = groupDescriptions.find(
-      ({ id }) => id == "cluster"
-    ).description;
+    content.innerHTML = "";
+    if (isEditable) {
+      content.insertAdjacentHTML(
+        "afterbegin",
+        getEditablePencilIcon(
+          "editGeoDemosClusterInfo",
+          groupDescriptions.find(({ id, value }) => id == "cluster")
+        )
+      );
+    }
+    content.insertAdjacentHTML(
+      "beforeend",
+      groupDescriptions.find(({ id }) => id == "cluster").description
+    );
 
     // Add map
     const minZoom = 8;
@@ -296,14 +307,20 @@ async function getChartLayout() {
 
 function updateGroupDescription(groupDescriptions, groupNo, isEditable) {
   const groupDescriptionText = groupDescriptions.find(
-    ({ id }) => id == groupNo
+    ({ id, value }) => id == groupNo
   );
 
   const content = document.getElementById("query-group-description__content");
   content.innerHTML = ""; // Clear the content
 
   if (isEditable) {
-    getEditablePencilIcon();
+    content.insertAdjacentHTML(
+      "afterbegin",
+      getEditablePencilIcon(
+        "editGeoDemosGroupInfo",
+        groupDescriptions.find(({ id, value }) => id == groupNo)
+      )
+    );
   }
   // Now add the contentText
   content.insertAdjacentHTML("beforeend", groupDescriptionText.description);

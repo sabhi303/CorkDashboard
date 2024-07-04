@@ -304,7 +304,6 @@ export function editThemesHeader(data, api) {
 }
 
 export function editThemesChartInfo(data, api) {
-
   for (let key in data) {
     if (
       data.hasOwnProperty(key) &&
@@ -320,9 +319,21 @@ export function editThemesChartInfo(data, api) {
   editHeader(data, api);
 }
 
-
-export function editQueries(data, api){
+export function editQueries(data, api) {
   delete data["linkhref"];
+  editHeader(data, api);
+}
+
+export function editGeoDemosGroupInfo(data, api = "") {
+  console.log("data:", data);
+  console.log("api:", api);
+  delete data["_id"];
+  editHeader(data, api);
+}
+export function editGeoDemosClusterInfo(data, api = "") {
+  console.log("data:", data);
+  console.log("api:", api);
+  delete data["_id"];
   editHeader(data, api);
 }
 
@@ -331,3 +342,5 @@ window.editRegion = editRegion;
 window.editThemesHeader = editThemesHeader;
 window.editThemesChartInfo = editThemesChartInfo;
 window.editQueries = editQueries;
+window.editGeoDemosClusterInfo = editGeoDemosClusterInfo;
+window.editGeoDemosGroupInfo = editGeoDemosGroupInfo;

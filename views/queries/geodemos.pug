@@ -122,6 +122,8 @@ block append scripts
     if isEditable
         script(type='text/javascript').
 
+            //- basically ithun mla element return krayachay
+
             document.addEventListener('DOMContentLoaded', function() {
                 var groupDescriptions = !{JSON.stringify(geodemos)};
 
@@ -134,40 +136,40 @@ block append scripts
 
             });
 
-            function getEditablePencilIcon(){
-            const content = document.getElementById("query-group-description__content");
-            content.innerHTML = ""; // Clear the content
-
-            const htmlSnippet = `
-                <div class="header">
-                    <div class="edit-icon-wrapper" onclick="editQueriesGroupText()">
-                        <img src="/images/icons/admin/pencil.svg" alt="Edit Icon">
+           function getEditablePencilIcon(editFunction, argument) {
+                const argumentStr = JSON.stringify(argument).replace(/"/g, '&quot;');
+                const htmlSnippet = `
+                    <div class="header">
+                        <div class="edit-icon-wrapper" onclick="${editFunction}(JSON.parse('${argumentStr}'), '/admin/queries/geodemos/edit')">
+                            <img src="/images/icons/admin/pencil.svg" alt="Edit Icon">
+                        </div>
                     </div>
-                </div>
-                <style>
-                    .header {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
+                    <style>
+                        .header {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
 
-                    .edit-icon-wrapper {
-                        display: flex;
-                        cursor: pointer;
-                        transition: transform 0.2s, color 0.2s;
-                        align-items: center;
-                        justify-content: center;
-                    }
+                        .edit-icon-wrapper {
+                            display: flex;
+                            cursor: pointer;
+                            transition: transform 0.2s, color 0.2s;
+                            align-items: center;
+                            justify-content: center;
+                        }
 
-                    .edit-icon-wrapper:hover {
-                        transform: scale(1.2);
-                        color: #007BFF;
-                    }
-                </style>
-            `;
+                        .edit-icon-wrapper:hover {
+                            transform: scale(1.2);
+                            color: #007BFF;
+                        }
+                    </style>
+                `;
 
-            content.insertAdjacentHTML("afterbegin", htmlSnippet);
+                return htmlSnippet;
             }
+
+
     else 
         script(type='text/javascript').
             document.addEventListener('DOMContentLoaded', function() {

@@ -26,7 +26,7 @@ router.get("/geodemos", async function (req, res, next) {
     title: "Query: Geodemographics",
     page: "",
     geodemos: GeoDemos,
-    isEditable: true,
+    isEditable: false,
   });
 });
 
