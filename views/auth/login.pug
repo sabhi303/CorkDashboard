@@ -50,10 +50,10 @@ block content
                             .card-header.text-center
                             h3 Login to Your Account
                             .card-body
-                                form(action='/login' method='POST')
+                                form(action='/auth/login' method='POST')
                                     .form-group
-                                    label(for='username') Username
-                                    input#username.form-control(type='text' name='username' placeholder='Enter your username' required)
+                                    label(for='email') Email
+                                    input#username.form-control(type='text' name='email' placeholder='Enter your Email' required)
                                     .form-group
                                     label(for='password') Password
                                     input#password.form-control(type='password' name='password' placeholder='Enter your password' required)
@@ -61,4 +61,4 @@ block content
                                     button.btn.btn-primary(type='submit') Login
                                 .card-footer.text-center
                                 p Don't have an account?
-                                a(href='/register' class='btn btn-link') Register Here
+                                a(href='/auth/register' class='btn btn-link') Register Here
