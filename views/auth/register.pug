@@ -1,7 +1,7 @@
 extends ../layout
 
 block append head
-    title Cork Dashboard | Login
+    title Registration Page
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     link(rel="stylesheet" href="/stylesheets/lib/flickity.min.css")
@@ -48,17 +48,28 @@ block content
                     <div class="carousel" data-flickity='{ "freeScroll": true, "wrapAround": false, "freeScrollFriction": 0.05,"selectedAttraction": 0.05, "cellSelector": ".carousel-cell", "cellAlign": "left", "percentPosition": false, "pageDots": true, "adaptiveHeight": false, "setGallerySize": false}'>
                         div#card.carousel-cell
                             .card-header.text-center
-                            h3 Login to Your Account
+                            h3 Register Your Account
                             .card-body
-                                form(action='/auth/login' method='POST')
+                                form(action='/auth/register' method='POST')
                                     .form-group
-                                    label(for='email') Email
-                                    input#username.form-control(type='text' name='email' placeholder='Enter your Email' required)
+                                        label(for='name') Name
+                                        input#name.form-control(type='text' name='name' placeholder='Enter your Name' required)
                                     .form-group
-                                    label(for='password') Password
-                                    input#password.form-control(type='password' name='password' placeholder='Enter your password' required)
+                                        label(for='email') Email
+                                        input#email.form-control(type='email' name='email' placeholder='Enter your Email' required)
+                                    .form-row
+                                        .form-group.col-md-6
+                                            label(for='password') Password
+                                            input#password.form-control(type='password' name='password' placeholder='Enter your Password' required)
+                                        .form-group.col-md-6
+                                            label(for='confirmPassword') Confirm Password
+                                            input#confirm-password.form-control(type='password' name='confirmPassword' placeholder='Confirm your Password' required)
+                                    .form-group
+                                        div.form-check
+                                            input#updates.form-check-input(type='checkbox' name='updates')
+                                            label.form-check-label(for='updates') I want to receive updates
                                     .form-group.text-center
-                                    button.btn.btn-primary(type='submit') Login
+                                        button.btn.btn-primary(type='submit') Register
                                 .card-footer.text-center
-                                p Don't have an account?
-                                a(href='/auth/register' class='btn btn-link') Register Here
+                                    p Already have an account?
+                                    a(href='/auth/login' class='btn btn-link') Login Here
