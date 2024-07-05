@@ -137,10 +137,17 @@ block append scripts
             });
 
            function getEditablePencilIcon(editFunction, argument) {
-                const argumentStr = JSON.stringify(argument).replace(/"/g, '&quot;');
+                const argumentStr = JSON.stringify(argument)
+                    .replace(/\\/g, '\\\\')  // Escape backslashes
+                    .replace(/"/g, '&quot;') // Escape double quotes for HTML
+                    .replace(/'/g, '&quot;')  // Escape single quotes for HTML
+                    .replace(/\n/g, '\\n')   // Escape newlines
+                    .replace(/\r/g, '\\r')   // Escape carriage returns
+                    .replace(/\t/g, '\\t');  // Escape tabs
+
                 const htmlSnippet = `
                     <div class="header">
-                        <div class="edit-icon-wrapper" onclick="${editFunction}(JSON.parse('${argumentStr}'), '/admin/queries/geodemos/edit')">
+                        <div class="edit-icon-wrapper" onclick="${editFunction}(JSON.parse(\`${argumentStr}\`), '/admin/queries/geodemos/edit')">
                             <img src="/images/icons/admin/pencil.svg" alt="Edit Icon">
                         </div>
                     </div>
@@ -168,6 +175,7 @@ block append scripts
 
                 return htmlSnippet;
             }
+
 
 
     else 

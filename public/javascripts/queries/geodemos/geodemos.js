@@ -316,10 +316,7 @@ function updateGroupDescription(groupDescriptions, groupNo, isEditable) {
   if (isEditable) {
     content.insertAdjacentHTML(
       "afterbegin",
-      getEditablePencilIcon(
-        "editGeoDemosGroupInfo",
-        groupDescriptions.find(({ id, value }) => id == groupNo)
-      )
+      getEditablePencilIcon("editGeoDemosGroupInfo", groupDescriptionText)
     );
   }
   // Now add the contentText
