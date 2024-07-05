@@ -1,0 +1,7 @@
+mixin admin-card(options = {title: "", description:"", linktext:"", href:""})
+    .col
+        .card(style="width: 18vmax; height: 10vmax;")
+            .card-body
+                h5.card-title #{options.title}
+                p.card-text #{options.description}
+            a.btn.btn-primary(href=options.href) #{options.linktext}
