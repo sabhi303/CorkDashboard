@@ -122,8 +122,8 @@ async function main () {
       if (document.querySelector('#chart-' + chartDivIds[0]).style.display !== 'none') {
         rentChart.drawChart()
         rentChart.addTooltip('Rent price,  ', '', 'label')
-        rentChart.showSelectedLabelsX([0, 3, 6, 9, 12])
-        rentChart.showSelectedLabelsY([0, 2, 4, 6, 8, 10])
+        // rentChart.showSelectedLabelsX([0, 3, 6, 9, 12])
+        // rentChart.showSelectedLabelsY([0, 2, 4, 6, 8, 10])
       }
       // if (document.querySelector('#chart-' + chartDivIds[1]).style.display !== 'none') {
       //   // rentByBedsChart.drawChart()
