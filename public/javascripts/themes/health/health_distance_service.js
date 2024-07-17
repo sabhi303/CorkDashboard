@@ -16,7 +16,7 @@ export async function main () {
   try {
     addSpinner('chart-' + chartDivIds[0], `<b>statbank.cso.ie</b> for table <b>${TABLE_CODE}</b>: <i>Average Distance of Residential Dwellings to Everyday Services</i>`)
 
-    const json = await fetchJsonFromUrlAsync(STATBANK_BASE_URL + TABLE_CODE)
+    const json = await fetchJsonFromUrlAsync("https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.ReadDataset/MDS01/JSON-stat/2.0/en")
     if (json) {
       removeSpinner('chart-' + chartDivIds[0])
     }
