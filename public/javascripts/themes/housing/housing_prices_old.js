@@ -219,7 +219,11 @@ async function main () {
         houseSalesHouseChart.showSelectedLabelsY([0, 2, 4, 6, 8, 10, 12])
         houseSalesHouseChart.addTooltip('House Sales Volume, ', '', 'label')
       }
-      if (document.querySelector('#chart-' + chartDivIdsSales[2]).style.display !== 'none') {
+      if (document.querySelector('#chart-' + 
+        
+        
+        
+        [2]).style.display !== 'none') {
         houseSalesApartmentChart.drawChart()
         houseSalesApartmentChart.showSelectedLabelsX([0, 2, 4, 6, 8, 10, 12])
         houseSalesApartmentChart.showSelectedLabelsY([0, 2, 4, 6, 8, 10, 12])
@@ -252,7 +256,11 @@ async function main () {
       redraw()
     })
 
-    d3.select('#btn-' + chartDivIdsSales[0]).on('click', function () {
+    d3.select('#btn-' + 
+      
+      
+      
+      [0]).on('click', function () {
       activeBtn('btn-' + chartDivIdsSales[0], ['btn-' + chartDivIdsSales[1], 'btn-' + chartDivIdsSales[2]])
       d3.select('#chart-' + chartDivIdsSales[0]).style('display', 'block')
       d3.select('#chart-' + chartDivIdsSales[1]).style('display', 'none')

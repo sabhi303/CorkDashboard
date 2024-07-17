@@ -4,26 +4,11 @@ import { addSpinner, removeSpinner, addErrorMessageButton } from "../../modules/
 
 async function main() {
   const chartDivId = "housing-price-all";
+  const chartDivIdSales = "housing-sales-all";  // for volume
+
 
   d3.select("#chart-" + chartDivId).style("display", "block");
-
-  // Create and append buttons dynamically
-  const controlsDiv = d3.select("#chart-" + chartDivId).append("div").attr("id", "controls");
-
-  controlsDiv.append("button")
-    .attr("id", "show-all")
-    .text("All")
-    .on("click", () => drawChart("All Dwelling Types"));
-
-  controlsDiv.append("button")
-    .attr("id", "show-apartment")
-    .text("Apartment")
-    .on("click", () => drawChart("Apartment"));
-
-  controlsDiv.append("button")
-    .attr("id", "show-house")
-    .text("House")
-    .on("click", () => drawChart("House"));
+  d3.select("#chart-" + chartDivIdSales).style("display", "block");
 
   const parseYearMonth = d3.timeParse("%Y %B");
   const formatMonth = d3.timeFormat("%b %Y"); // Format to "Jan 2022"
@@ -34,10 +19,16 @@ async function main() {
       "chart-" + chartDivId,
       `<b>statbank.cso.ie</b>: <i>Market-based Household Purchases of Residential Dwellings</i>`
     );
+    addSpinner(
+      "chart-" + chartDivIdSales,
+      `<b>statbank.cso.ie</b>: <i>Market-based Household Purchases of Residential Dwellings</i>`
+    );
 
     const json = await fetchJsonFromUrlAsyncTimeout(STATIC_DATA_URL);
     if (json) {
       removeSpinner("chart-" + chartDivId);
+      removeSpinner("chart-" + chartDivIdSales);
+
     }
 
     const transformData = (region, dwellingType, statisticType) => {
@@ -73,45 +64,78 @@ async function main() {
         .filter((d) => d.date && !isNaN(d.value));
     };
 
-    const drawChart = (dwellingType) => {
-      // Transform data for Cork City
-      const corkCityData = transformData("Cork City", dwellingType, "Mean Sale Price");
-      // Transform data for Cork County
-      const corkCountyData = transformData("Cork County", dwellingType, "Mean Sale Price");
 
-      // Combine both datasets
-      const combinedData = [...corkCityData, ...corkCountyData];
+    // Mean Sale Price
+    // Transform data for Cork City
+    const corkCityData = transformData("Cork City", "All Dwelling Types", "Mean Sale Price");
+    // Transform data for Cork County
+    const corkCountyData = transformData("Cork County", "All Dwelling Types", "Mean Sale Price");
 
-      // Debugging log to check data transformation
-      console.log("Combined Data:", combinedData);
+    // Combine both datasets
+    const combinedData = [...corkCityData, ...corkCountyData];
 
-      const chartData = {
-        elementId: "chart-" + chartDivId,
-        data: combinedData,
-        tracenames: ["Cork City", "Cork County"],
-        tracekey: "RPPI Region", // Use actual date object for x-axis labels
-        xV: "date",
-        yV: "value",
-        tX: "Year", // Label for x-axis (Year-Month, etc.)
-        tY: "Mean Sale Price",
-        formaty: "hundredThousandsShort",
-      };
+    // Debugging log to check data transformation
+    // console.log("Combined Data:", combinedData);
 
-      const housingPriceChart = new BCDMultiLineChart(chartData);
-      housingPriceChart.drawChart();
-      housingPriceChart.addTooltip("Mean Sale Price, ", "", "label");
-
-      window.addEventListener("resize", () => {
-        housingPriceChart.drawChart();
-      });
+    const chartData = {
+      elementId: "chart-" + chartDivId,
+      data: combinedData,
+      tracenames: ["Cork City", "Cork County"],
+      tracekey: "RPPI Region", // Use actual date object for x-axis labels
+      xV: "date",
+      yV: "value",
+      tX: "Year", // Label for x-axis (Year-Month, etc.)
+      tY: "Mean Sale Price",
+      formaty: "hundredThousandsShort",
     };
 
-    // Initial draw with all dwelling types
-    drawChart("All Dwelling Types");
+    const housingPriceChart = new BCDMultiLineChart(chartData);
+    housingPriceChart.drawChart();
+    housingPriceChart.addTooltip("Mean Sale Price, ", "", "label");
+
+    window.addEventListener("resize", () => {
+      housingPriceChart.drawChart();
+    });
+
+
+    // Volume of house Sales
+    // Transform data for Cork City
+    const corkCityVolumeData = transformData("Cork City", "All Dwelling Types", "Volume of Sales");
+    // Transform data for Cork County
+    const corkCountyVolumeData = transformData("Cork County", "All Dwelling Types", "Volume of Sales");
+
+    // Combine both datasets
+    const combinedVolumeData = [...corkCityVolumeData, ...corkCountyVolumeData];
+
+    // Debugging log to check data transformation
+    // console.log("Combined Data:", combinedData);
+
+    const chartVolumeData = {
+      elementId: "chart-" + chartDivIdSales,
+      data: combinedVolumeData,
+      tracenames: ["Cork City", "Cork County"],
+      tracekey: "RPPI Region", // Use actual date object for x-axis labels
+      xV: "date",
+      yV: "value",
+      tX: "Year", 
+      tY: "Volume of Sales",
+      formaty: "hundredThousandsShort",
+    };
+
+    const housingVolumeChart = new BCDMultiLineChart(chartVolumeData);
+    housingVolumeChart.drawChart();
+    housingVolumeChart.addTooltip("Voume of Sales, ", "", "label");
+
+    window.addEventListener("resize", () => {
+      housingVolumeChart.drawChart();
+    });
+
   } catch (e) {
     console.error(e);
     removeSpinner("chart-" + chartDivId);
-    addErrorMessageButton("chart-" + chartDivId, e);
+    addErrorMessageButton("chart-" + chartDivIdSales, e);
+    removeSpinner("chart-" + chartDivId);
+    addErrorMessageButton("chart-" + chartDivIdSales, e);
   }
 }
 
