@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RPPI Line Graph</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .chart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .tooltip {
+            position: absolute;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #aaa;
+            pointer-events: none;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <label for="region-select">Select Region:</label>
+        <select id="region-select">
+            <option value="Cork City">Cork City</option>
+            <option value="Cork County">Cork County</option>
+        </select>
+
+        <label for="dwelling-select">Select Dwelling Type:</label>
+        <select id="dwelling-select">
+            <option value="all">All</option>
+        </select>
+
+        <label for="statistic-select">Select Statistic:</label>
+        <select id="statistic-select">
+            <option value="Volume of Sales">Volume of Sales</option>
+            <option value="Mean Sale Price">Mean Sale Price</option>
+        </select>
+    </div>
+    <div class="chart">
+        <svg width="960" height="500"></svg>
+    </div>
+
+    <div class="tooltip"></div>
+
+    <script>
+        const svg = d3.select("svg"),
+            margin = { top: 20, right: 20, bottom: 30, left: 50 },
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.top - margin.bottom,
+            g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleTime().range([0, width]);
+        const y = d3.scaleLinear().range([height, 0]);
+        const line = d3.line()
+            .x(d => x(new Date(d.Month)))
+            .y(d => y(d.Value));
+
+        const xAxis = g.append("g")
+            .attr("transform", `translate(0,${height})`)
+            .attr("class", "x-axis");
+
+        const yAxis = g.append("g")
+            .attr("class", "y-axis");
+
+        const tooltip = d3.select(".tooltip");
+
+        let data;
+
+        d3.json("filtered_data.json").then(jsonData => {
+            data = jsonData;
+            updateDwellingSelect();
+            updateChart();
+        });
+
+        d3.select("#region-select").on("change", function() {
+            updateDwellingSelect();
+            updateChart();
+        });
+
+        d3.select("#dwelling-select").on("change", updateChart);
+        d3.select("#statistic-select").on("change", updateChart);
+
+        function updateDwellingSelect() {
+            const region = d3.select("#region-select").property("value");
+            const dwellings = Object.keys(data[region]["Type of Dwelling"]);
+            const select = d3.select("#dwelling-select");
+
+            select.selectAll("option")
+                .data(["all"].concat(dwellings))
+                .enter()
+                .append("option")
+                .attr("value", d => d)
+                .text(d => d);
+
+            select.selectAll("option")
+                .data(["all"].concat(dwellings))
+                .exit()
+                .remove();
+        }
+
+        function updateChart() {
+            const region = d3.select("#region-select").property("value");
+            const dwellingType = d3.select("#dwelling-select").property("value");
+            const statistic = d3.select("#statistic-select").property("value");
+            const months = data[region]["Month"];
+            let dwellingTypes = Object.keys(data[region]["Type of Dwelling"]);
+
+            // If "all" is selected, plot all dwelling types
+            if (dwellingType === "all") {
+                dwellingTypes = Object.keys(data[region]["Type of Dwelling"]);
+            } else {
+                dwellingTypes = [dwellingType];
+            }
+
+            // Prepare data for all selected dwelling types
+            const linesData = dwellingTypes.map(dwelling => {
+                return {
+                    dwellingType: dwelling,
+                    values: data[region]["Type of Dwelling"][dwelling][statistic].Values.map((v, i) => ({ Month: months[i], Value: v }))
+                };
+            });
+
+            x.domain(d3.extent(months, d => new Date(d)));
+            y.domain([
+                d3.min(linesData, d => d3.min(d.values, v => v.Value)),
+                d3.max(linesData, d => d3.max(d.values, v => v.Value))
+            ]);
+
+            xAxis.transition().call(d3.axisBottom(x));
+            yAxis.transition().call(d3.axisLeft(y));
+
+            // Remove existing lines
+            g.selectAll(".line").remove();
+
+            // Add new lines
+            const lineGroups = g.selectAll(".line")
+                .data(linesData)
+                .enter()
+                .append("g")
+                .attr("class", "line");
+
+            lineGroups.append("path")
+                .attr("d", d => line(d.values))
+                .style("fill", "none")
+                .style("stroke", (d, i) => d3.schemeCategory10[i]) // Color based on index
+                .style("stroke-width", "2");
+
+            // Add tooltips
+            lineGroups.selectAll("circle")
+                .data(d => d.values)
+                .enter()
+                .append("circle")
+                .attr("cx", d => x(new Date(d.Month)))
+                .attr("cy", d => y(d.Value))
+                .attr("r", 5)
+                .style("fill", "white")
+                .style("stroke", (d, i) => d3.schemeCategory10[i]) // Color based on index
+                .on("mouseover", (event, d) => {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`Value: ${d.Value}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 20) + "px");
+                })
+                .on("mouseout", () => {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
+        }
+    </script>
+</body>
+</html>

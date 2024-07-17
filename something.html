@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3 Line Chart</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .line {
+            fill: none;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+<body>
+    <svg width="960" height="500"></svg>
+    <script>
+        // Set the dimensions and margins of the graph
+        const margin = {top: 10, right: 30, bottom: 30, left: 60},
+              width = 960 - margin.left - margin.right,
+              height = 500 - margin.top - margin.bottom;
+
+        // Append the svg object to the body of the page
+        const svg = d3.select("svg")
+          .append("g")
+          .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Fetch the data from the API
+        fetch('https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.ReadDataset/HPM05/JSON-stat/2.0/en')
+          .then(response => response.json())
+          .then(data => {
+            // Parse the data
+            const parsedData = parseData(data);
+
+            // Set the scales
+            const x = d3.scaleTime()
+              .domain(d3.extent(parsedData, d => d.date))
+              .range([0, width]);
+            
+            const y = d3.scaleLinear()
+              .domain([0, d3.max(parsedData, d => d.value)])
+              .range([height, 0]);
+
+            // Add the x axis
+            svg.append("g")
+              .attr("transform", `translate(0,${height})`)
+              .call(d3.axisBottom(x));
+
+            // Add the y axis
+            svg.append("g")
+              .call(d3.axisLeft(y));
+
+            // Add the line
+            svg.append("path")
+              .datum(parsedData)
+              .attr("fill", "none")
+              .attr("stroke", "steelblue")
+              .attr("stroke-width", 1.5)
+              .attr("class", "line")
+              .attr("d", d3.line()
+                .x(d => x(d.date))
+                .y(d => y(d.value))
+              );
+
+            // Add dots for data points
+            svg.selectAll("dot")
+              .data(parsedData)
+              .enter().append("circle")
+              .attr("r", 2.5)
+              .attr("cx", d => x(d.date))
+              .attr("cy", d => y(d.value))
+              .attr("fill", "red");
+          });
+
+        function parseData(data) {
+          // Convert the raw JSON data into an array of objects with {date, value}
+          let parsedData = [];
+
+          // Assuming data structure, you might need to adjust based on actual data
+          const dates = data.dimension.Year.category.label;
+          const values = data.value;
+
+          Object.keys(dates).forEach((key, index) => {
+            parsedData.push({
+              date: new Date(dates[key]),
+              value: values[index]
+            });
+          });
+
+          return parsedData;
+        }
+    </script>
+</body>
+</html>
