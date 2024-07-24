@@ -82,7 +82,7 @@ import { getCityLatLng, getCustomMapMarker, getCustomMapIcon } from '../../modul
 
   const TIMEOUT_INTERVAL = 10000 // interval after which request generates a TO error
   const RETRY_INTERVAL = 2000000 // interval to wait after an error response
-  const REFRESH_INTERVAL = 1000 * 60 * 5 // n minute interval for data refresh
+  const REFRESH_INTERVAL = 1000 * 60 * 10 // n minute interval for data refresh
   let refreshTimeout
   let waterOPWCluster
 
