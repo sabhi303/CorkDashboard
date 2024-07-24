@@ -44,98 +44,14 @@ import { getDefaultMapOptions, getCityLatLng } from '../../modules/bcd-maps.js'
     const waterLevelSitesCluster = L.markerClusterGroup()
     const waterLevelSites = await getSites('./data/environment/waterlevel_stations.geojson')
 
-    // console.log(waterLevelSites)
-    // waterLevelSitesCluster = await waterLevelSites.features.map(async d => {
-    //   let mc = L.markerClusterGroup()
-    //   const marker = new WaterLevelMarker(
-    //     new L.LatLng(d.geometry.coordinates[0], d.geometry.coordinates[1]), {
-    //       // id: d.id,
-    //       // opacity: 0.9,
-    //       title: 'Water Level Monitor Site', // shown in rollover tooltip
-    //       alt: 'Water Level monitor site icon',
-    //       // icon: waterLevelMapIcon,
-    //       type: 'Water Level Monitor'
-    //     })
-    //   // marker.bindPopup(getPopup(d), waterLevelPopupOptons)
-    //   // marker.on('popupopen', () => {
-    //   //   getPopupPlot(d)
-    //   // })
-    //   mc.addMarker(marker)
-    //   // const siteReadings = await getSiteReadings(d)
-    //   return mc
-    // })
-    // waterLevelMap.addLayer(mc)
-    // const allSitesData = await Promise.all(allSitesPromises)
-    // let allSitesFlat = allSitesData.flat(1)
-    // allSitesFlat = allSitesFlat.filter((s, i) => {
-    //   return isToday(s.date) && (parseInt(s.date.getHours()) < 10) // // TODO: remove demo hack
-    // })
-    // // console.log('allSitesFlat')
-    // // console.log(allSitesFlat)
-
-    // waterLevelMap.addLayer(waterLevelSitesLayer)
-    // // waterLevelMap.fitBounds(waterLevelCluster.getBounds())
-    // // console.log(allSitesFlat)
-
-    // const waterLevelChartOptions = {
-    //   elementId: 'chart-water-level-monitors',
-    //   d: allSitesFlat,
-    //   tracekey: 'name', // ?
-    //   // tracenames: keys, // For StackedAreaChart-formatted data need to provide keys
-    //   xV: 'date', // expects a date object
-    //   yV: 'value',
-    //   tX: 'Time today', // string axis title
-    //   tY: 'dB'
-    // }
-
-    // const waterLevelChart = new MultiLineChart(waterLevelChartOptions)
-
-    // const redraw = () => {
-    //   if (document.querySelector('#chart-water-level-monitors').style.display !== 'none') {
-    //     waterLevelChart.drawChart()
-    //     waterLevelChart.addTooltip('waterLevel Level (Decibels) - ', '', 'label')
-    //   }
-    // }
-    // redraw()
-
-
-
-    // d3.select('#btn-water-level-chart').on('click', function () {
-    //   activeBtn(this)
-    //   d3.select('#chart-water-level-monitors').style('display', 'block')
-    //   d3.select('#map-water-level-monitors').style('display', 'none')
-    //   waterLevelChart.drawChart()
-    //   waterLevelChart.addTooltip('waterLevel level (Decibels) - ', '', 'label')
-    // })
-
-    // d3.select('#btn-water-level-map').on('click', function () {
-    //   activeBtn(this)
-    //   d3.select('#chart-water-level-monitors').style('display', 'none')
-    //   d3.select('#map-water-level-monitors').style('display', 'block')
-    // })
-
-    // window.addEventListener('resize', () => {
-    //   redraw()
-    // })
   } catch (e) {
     console.log(e)
   }
 })()
 
 async function getSites(url) {
-  // need to be able to look up the static data using cosit as key
-  // want an array of objects for dublin counters
   const siteData = await d3.json(url)
 
-  // siteData = siteData[key].map(site => {
-  //   const obj = {
-  //     id: +site.site_id,
-  //     name: site.name,
-  //     lat: +site.lat,
-  //     lng: +site.lon
-  //   }
-  //   return obj
-  // })
   return siteData
 }
 
