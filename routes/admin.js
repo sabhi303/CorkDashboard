@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* Administration Dashboard */
 router.get("/", function (req, res, next) {
-  res.render("admin/admin", {
+  res.render("admin/admin", { 
     title: "Cork Dashboard | Admin",
     active: "Admin",
   });
