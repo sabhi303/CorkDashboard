@@ -49,7 +49,7 @@ async function processWeather (xmlWeather) {
 
       d3.select('#hero-weather__right-top__text')
         .html(getStringForAttribute(s, 'wind_direction'))
-
+      
       const windSpeedKPH = Math.round(parseInt(getStringForAttribute(s, 'wind_speed').split(' ')[0]) * 1.852)
       d3.select('#hero-weather__right-bottom')
         .html(windSpeedKPH + ' kph')
