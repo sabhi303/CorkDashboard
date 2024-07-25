@@ -5,7 +5,8 @@ import JSONstat from 'https://unpkg.com/jsonstat-toolkit@1.0.8/import.mjs';
 
 async function main(options) {
   // Fetch JSON data
-  const json = await fetchJsonFromUrlAsync("../data/static/filtered_data.json");
+  // const json = await fetchJsonFromUrlAsync("../data/static/filtered_data.json");
+  const json = await fetchJsonFromUrlAsync("/api/themes/housing");
 
   // Check if data is fetched
   if (!json) {

@@ -12,7 +12,9 @@ async function main() {
 
   const parseYearMonth = d3.timeParse("%Y %B");
   const formatMonth = d3.timeFormat("%b %Y"); // Format to "Jan 2022"
-  const STATIC_DATA_URL = "../data/static/filtered_data.json";
+  // const STATIC_DATA_URL = "../data/static/filtered_data.json";
+  const STATIC_DATA_URL = "/api/themes/housing";
+
 
   try {
     addSpinner(
