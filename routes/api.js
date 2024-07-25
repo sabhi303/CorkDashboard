@@ -28,4 +28,8 @@ router.get('/weather/latest', weatherController.getWeatherLatest)
 const themesHousingController = require('../controllers/themes_housing_controller')
 router.get('/themes/housing', themesHousingController.getData)
 
+// Themes Transport Data
+const themesTransportController = require('../controllers/themes_transport_controller')
+router.get('/themes/transport', themesTransportController.getData)
+
 module.exports = router
