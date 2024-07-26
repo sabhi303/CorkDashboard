@@ -32,4 +32,8 @@ router.get('/themes/housing', themesHousingController.getData)
 const themesTransportController = require('../controllers/themes_transport_controller')
 router.get('/themes/transport', themesTransportController.getData)
 
+// Themes Population Data
+const themesPopulationController = require('../controllers/themes_population_controller')
+router.get('/themes/population', themesPopulationController.getData)
+
 module.exports = router

@@ -11,7 +11,8 @@ import { TimeoutError } from "../../modules/TimeoutError.js";
 export async function main() {
   const parseYear = d3.timeParse("%Y");
   const chartDivId = "population";
-  const STATIC_DATA_URL = "/data/static/cork_population_data.json"; // Assuming the path to the file is correctly set
+  // const STATIC_DATA_URL = "/data/static/cork_population_data.json"; // Assuming the path to the file is correctly set
+  const STATIC_DATA_URL = "/api/themes/population"; // Assuming the path to the file is correctly set
 
   try {
     addSpinner(

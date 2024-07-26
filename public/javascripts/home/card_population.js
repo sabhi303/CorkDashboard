@@ -3,7 +3,7 @@ import { CardChartLine } from '../modules/CardChartLine.js';
 import { fetchJsonFromUrlAsync } from '../modules/bcd-async.js';
 
 async function main(options) {
-  const json = await fetchJsonFromUrlAsync(options.plotoptions.data.href);
+  const json = await fetchJsonFromUrlAsync("/api/themes/population");
 
   // Directly use the structure provided in your JSON
   const data = json['Cork'];
