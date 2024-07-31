@@ -19,6 +19,8 @@ async function main () {
   const STATBANK_BLOB_URL = `https://ws.cso.ie/public/api.jsonrpc?data=%7B%22jsonrpc%22:%222.0%22,%22method%22:%22PxStat.Data.Cube_API.ReadDataset%22,%22params%22:%7B%22class%22:%22query%22,%22id%22:%5B%5D,%22dimension%22:%7B%7D,%22extension%22:%7B%22pivot%22:null,%22codes%22:false,%22language%22:%7B%22code%22:%22en%22%7D,%22format%22:%7B%22type%22:%22JSON-stat%22,%22version%22:%222.0%22%7D,%22matrix%22:%22RIA02%22%7D,%22version%22:%222.0%22%7D%7D`
   const TABLE_CODE = 'RIQ02'
   const STATIC_URL = '../../data/static/RIQ02.json'
+  // const STATIC_URL = "https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.ReadDataset/RIA02/JSON-stat/2.0/en"
+
   try {
     addSpinner('chart-' + chartDivIds[0], `<b>statbank.cso.ie</b> for table <b>${TABLE_CODE}</b>: <i>RTB Average Monthly Rent Report</i>`)
     const json = await fetchJsonFromUrlAsyncTimeout(STATIC_URL)
