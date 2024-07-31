@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+require('dotenv').config(); // Load environment variables
 
-// Set debug mode globally
-mongoose.set('debug', true);
+// Set debug mode from environment variable
+mongoose.set('debug', process.env.DEBUG_MODE === 'true');
 
-const url = 'mongodb://localhost:27017/';
-const dbName = 'CorkDashboard';
+const url = process.env.DB_URL;
+const dbName = process.env.DB_NAME;
 
 let db; // Hold the database connection
 

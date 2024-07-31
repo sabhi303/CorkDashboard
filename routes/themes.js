@@ -6,7 +6,7 @@ const Theme = require("../models/Theme");
 router.get("/", async (req, res) => {
   try {
     const themes = await Theme.find({});
-    console.log(themes);
+    // console.log(themes);
     // res.render('themes/themes', { themes });
     res.render("themes/themes_updated", { themes });
   } catch (err) {
