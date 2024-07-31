@@ -1,6 +1,6 @@
 import { fetchJsonFromUrlAsyncTimeout } from "../../modules/bcd-async.js";
 import { convertQuarterToDate } from "../../modules/bcd-date.js";
-import { BCDMultiLineChart } from "../../modules/BCDMultiLineChart.js";
+import { BCDMultiLineChart } from "../../modules/BCDMultilineChart.js";
 import {
   addSpinner,
   removeSpinner,

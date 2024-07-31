@@ -1,6 +1,6 @@
 import { fetchJsonFromUrlAsyncTimeout } from '../../modules/bcd-async.js'
 import JSONstat from 'https://unpkg.com/jsonstat-toolkit@1.0.8/import.mjs'
-import { BCDMultiLineChart } from '../../modules/BCDMultiLineChart.js'
+import { BCDMultiLineChart } from '../../modules/BCDMultilineChart.js'
 import { activeBtn, addSpinner, removeSpinner, addErrorMessageButton, removeErrorMessageButton } from '../../modules/bcd-ui.js'
 import { TimeoutError } from '../../modules/TimeoutError.js'
 import { hasCleanValue, formatHundredThousands, formatHundredThousandsShort } from '../../modules/bcd-data.js'

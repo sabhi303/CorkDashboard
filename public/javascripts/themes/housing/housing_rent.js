@@ -2,7 +2,7 @@ import { fetchJsonFromUrlAsyncTimeout } from '../../modules/bcd-async.js'
 import { hasCleanValue } from '../../modules/bcd-data.js'
 import { convertQuarterToDate, isFutureDate } from '../../modules/bcd-date.js'
 import JSONstat from 'https://unpkg.com/jsonstat-toolkit@1.0.8/import.mjs'
-import { BCDMultiLineChart } from '../../modules/BCDMultiLineChart.js'
+import { BCDMultiLineChart } from '../../modules/BCDMultilineChart.js'
 import { activeBtn, addSpinner, removeSpinner, addErrorMessageButton, removeErrorMessageButton } from '../../modules/bcd-ui.js'
 import { TimeoutError } from '../../modules/TimeoutError.js'
 

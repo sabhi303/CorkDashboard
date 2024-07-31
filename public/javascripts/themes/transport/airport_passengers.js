@@ -3,7 +3,7 @@ import { convertQuarterToDate } from "../../modules/bcd-date.js";
 import { hasCleanValue } from "../../modules/bcd-data.js";
 
 import JSONstat from "https://unpkg.com/jsonstat-toolkit@1.0.8/import.mjs";
-import { BCDMultiLineChart } from "../../modules/BCDMultiLineChart.js";
+import { BCDMultiLineChart } from "../../modules/BCDMultilineChart.js";
 import {
   addSpinner,
   removeSpinner,

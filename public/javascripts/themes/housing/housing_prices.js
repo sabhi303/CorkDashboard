@@ -1,5 +1,5 @@
 import { fetchJsonFromUrlAsyncTimeout } from "../../modules/bcd-async.js";
-import { BCDMultiLineChart } from "../../modules/BCDMultiLineChart.js";
+import { BCDMultiLineChart } from "../../modules/BCDMultilineChart.js";
 import { addSpinner, removeSpinner, addErrorMessageButton } from "../../modules/bcd-ui.js";
 
 async function main() {
