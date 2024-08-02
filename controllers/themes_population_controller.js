@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Define schema with collection name
 const themesPopulationSchema = new mongoose.Schema({
-  data: Object
+  Cork: Object
 }, { collection: 'data_themes_demographics_population' });
 
 const ThemesPopulationModel = mongoose.model('ThemesPopulation', themesPopulationSchema);
@@ -11,13 +11,13 @@ const ThemesPopulationModel = mongoose.model('ThemesPopulation', themesPopulatio
 const getThemesHousingFromMongoDB = async () => {
   try {
     // Find the document with water levels
-    const document = await ThemesPopulationModel.findOne({}).exec();
+    const document = await ThemesPopulationModel.findOne({}, "Cork").exec();
 
     if (!document) {
       throw new Error('No data found');
     }
 
-    return document;
+    return document.Cork;
   } catch (error) {
     console.error('Error fetching water levels data:', error);
     throw error;
