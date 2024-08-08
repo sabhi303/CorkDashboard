@@ -33,7 +33,7 @@ app.use(express.urlencoded({
 app.use(cookieParser())
 
 /*
-client caching of data files can be tiered based on whether the data is staic or dynamic (changing often)
+cent caching of data files can be tiered based on whether the data is staic or dynamic (changing often)
 * can set cache for any files in public sub-dirs
 * e.g. if frequently-changed files are placed in public/static and max-age applied, stale versions may be loaded from cache
 */
@@ -153,6 +153,6 @@ function getWaterLevels() {
   })
 }
 
-getWaterLevels()
+// getWaterLevels()
 
 module.exports = app
