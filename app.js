@@ -141,17 +141,17 @@ if (app.get('env') === 'development') {
 const http = require('http')
 const fs = require('fs')
 
-// Water Levels
-cron.schedule('*/15 * * * *', function () {
-  getWaterLevels()
-})
+// // Water Levels
+// cron.schedule('*/15 * * * *', function () {
+//   getWaterLevels()
+// })
 
-function getWaterLevels() {
-  const waterLevelFile = fs.createWriteStream('./public/data/environment/waterlevel.json')
-  http.get('http://waterlevel.ie/geojson/latest/', function (response) {
-    response.pipe(waterLevelFile)
-  })
-}
+// function getWaterLevels() {
+//   const waterLevelFile = fs.createWriteStream('./public/data/environment/waterlevel.json')
+//   http.get('http://waterlevel.ie/geojson/latest/', function (response) {
+//     response.pipe(waterLevelFile)
+//   })
+// }
 
 // getWaterLevels()
 

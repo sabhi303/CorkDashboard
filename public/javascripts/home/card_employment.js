@@ -1,74 +1,80 @@
-// /***
-//   Population card
-// ***/
+import { hasCleanValue } from '../modules/bcd-data.js';
+import { convertQuarterToDate } from '../modules/bcd-date.js';
+import { CardChartLine } from '../modules/CardChartLine.js';
+import { fetchJsonFromUrlAsyncTimeout } from '../modules/bcd-async.js';
+import { addSpinner, removeSpinner, addErrorMessageButton, removeErrorMessageButton } from '../modules/bcd-ui.js';
+import { TimeoutError } from '../modules/TimeoutError.js';
 
-import { hasCleanValue } from '../modules/bcd-data.js'
-import { convertQuarterToDate } from '../modules/bcd-date.js'
-import { CardChartLine } from '../modules/CardChartLine.js'
-import { fetchJsonFromUrlAsync } from '../modules/bcd-async.js'
-import JSONstat from 'https://unpkg.com/jsonstat-toolkit@1.0.8/import.mjs'
+export async function main(options) {
+  const TABLE_CODE = 'QLF08';
+  
+  try {
+    addSpinner(options.plotoptions.chartid, `<b>statbank.cso.ie</b> for table <b>${TABLE_CODE}</b>: <i>Annual Rate of Population Increase</i>`);
 
-async function main (options) {
-  // addSpinner('chart-' + chartDivIds[0], `<b>statbank.cso.ie</b> for table <b>${TABLE_CODE}</b>: <i>Annual Rate of Population Increase</i>`)
+    const json = await fetchJsonFromUrlAsyncTimeout(options.plotoptions.data.href);
+    if (json) {
+      removeSpinner(options.plotoptions.chartid);
+    }
 
-  const json = await fetchJsonFromUrlAsync(options.plotoptions.data.href)
+    const parseUnemploymentData = (data) => {
+      let result = [];
+      const quarters = data["Quarter"];
+      const regions = data["Region"];
 
-  // if (json) {
-  // removeSpinner('chart-' + chartDivIds[0])
-  // }
 
-  const dataset = JSONstat(json).Dataset(0)
-  // console.log(dataset)
+      
+      quarters.forEach((quarter, index) => {
+        const value = regions["State"][index];
+        if ((value)) {
+          result.push({
+            Quarter: quarter,
+            value: value,
+            date: convertQuarterToDate(quarter),
+            label: quarter
+          });
+        }
+      });
 
-  const dimensions = dataset.Dimension().map(dim => {
-    return dim.label
-  })
-  // const categoriesRegion = dataset.Dimension(dimensions[0]).Category().map(c => {
-  //   return c.label
-  // })
+      return result;
+    };
 
-  const categoriesStat = dataset.Dimension(dimensions[2]).Category().map(c => {
-    return c.label
-  })
+    const unemploymentData = parseUnemploymentData(json["Unemployed Persons aged 15 years and over"]);
+    
+    // Check if the element exists in the DOM before creating the chart
+    const chartElement = document.getElementById(options.plotoptions.chartid);
+    if (!chartElement) {
+      console.error(`Element with ID ${options.plotoptions.chartid} not found in the DOM.`);
+      return;
+    }
+    
+    const createChart = (elementId, data, traceName, tX, tY, formaty = "") => {
+      return new CardChartLine({
+        elementid: "#" + elementId,
+        data: data,
+        xvaluename: "date",
+        yvaluename: "value",
+        dL: 'label'
+      });
+    };
 
-  const employmentTable = dataset.toTable(
-    { type: 'arrobj' },
-    (d, i) => {
-      if (d[dimensions[0]] === 'Southern' &&
-        hasCleanValue(d)) {
-        d.date = convertQuarterToDate(d.Quarter)
-        d.value = +d.value
-        d.label = d.Quarter
-        return d
-      }
-    })
+    const unemploymentChart = createChart(
+      options.plotoptions.chartid, 
+      unemploymentData, 
+      "State", 
+      "Year", 
+      "Unemployed Persons"
+    );
 
-  // console.log(employmentTable)
+  } catch (e) {
+    console.error("Error creating employment card chart", e);
 
-  const employedCountConfig = {
-    data: employmentTable.filter(d => {
-      return d[dimensions[2]] === categoriesStat[3]
-    }),
-    elementid: '#' + options.plotoptions.chartid,
-    yvaluename: 'value',
-    xvaluename: 'date',
-    // sN: dimensions[1],
-    fV: d3.format('.3s'), // format y value
-    dL: 'label'
+    removeSpinner(options.plotoptions.chartid);
+
+    const eMsg = e instanceof TimeoutError ? "Request timed out" : `An error occurred: ${e.message}`;
+    const errBtnID = addErrorMessageButton(options.plotoptions.chartid, eMsg);
+    d3.select(`#${errBtnID}`).on("click", function () {
+      removeErrorMessageButton(options.plotoptions.chartid);
+      main(options);
+    });
   }
-
-  const employmentnCard = new CardChartLine(employedCountConfig)
-
-  window.addEventListener('resize', () => {
-    employmentnCard.drawChart()
-  })
-
-  //   //       // const info = getInfoText('#population-card a', 'The population of Dublin in ', ' on 2011', populationDataSet, populationColumnName, 'date', d3.format('.2s'))
-
-  //   //       // d3.select('#population-card__chart')
-  //   //       //   .select('#card-info-text')
-  //   //       //   .html('<p>' + info + '</p>')
-  //   //     })
 }
-
-export { main }
