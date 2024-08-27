@@ -1,0 +1,415 @@
+{
+  "id": "499edbdd-5280-46ed-85c5-b2ee9bfbc839",
+  "version": "2.0",
+  "name": "CorkDashboardMicroservice",
+  "url": "http://localhost:3000",
+  "tests": [{
+    "id": "f1f9be0f-9331-49ba-81e0-f2ef35c92b41",
+    "name": "HomePage",
+    "commands": [{
+      "id": "01bccd94-e146-4abd-9aa2-fe9cbe6f576c",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3859d9f3-4a99-46a8-91f9-d39c80011e7a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1364x766",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "69beb4b8-a61a-4685-9d32-34902cee0210",
+      "comment": "",
+      "command": "click",
+      "target": "id=hero-title__text--bottom",
+      "targets": [
+        ["id=hero-title__text--bottom", "id"],
+        ["css=#hero-title__text--bottom", "css:finder"],
+        ["xpath=//div[@id='hero-title__text--bottom']", "xpath:attributes"],
+        ["xpath=//div[@id='hero-title']/div[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1aec109-506d-4208-9b9d-bfe71768e864",
+      "comment": "",
+      "command": "click",
+      "target": "css=.next > .flickity-button-icon",
+      "targets": [
+        ["css=.next > .flickity-button-icon", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "c544f787-364d-498f-b266-2417b59e8645",
+      "comment": "",
+      "command": "click",
+      "target": "css=.previous",
+      "targets": [
+        ["css=.previous", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[@id='hero-carousel']/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "77c0e30e-4814-4223-8ba6-3bfcc41976e1",
+      "comment": "",
+      "command": "click",
+      "target": "id=hero-grid",
+      "targets": [
+        ["id=hero-grid", "id"],
+        ["css=#hero-grid", "css:finder"],
+        ["xpath=//div[@id='hero-grid']", "xpath:attributes"],
+        ["xpath=//div[@id='hero']/div", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "48ac208c-460c-4154-aa96-1f45c244eb4e",
+      "comment": "",
+      "command": "click",
+      "target": "css=#hero-weather__symbol > img",
+      "targets": [
+        ["css=#hero-weather__symbol > img", "css:finder"],
+        ["xpath=//img[@alt='weather symbol']", "xpath:img"],
+        ["xpath=//div[@id='hero-weather__symbol']/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "63b4a809-5a8d-4e50-84c3-65d5a697098d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.menu-button__bar--bottom",
+      "targets": [
+        ["css=.menu-button__bar--bottom", "css:finder"],
+        ["xpath=//div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f541a8c-d9fd-4dc2-b904-2e96f01bc80f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.s-m__trigger > .menu-button",
+      "targets": [
+        ["css=.s-m__trigger > .menu-button", "css:finder"],
+        ["xpath=//button[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2712ec78-0372-485d-a89e-ed93fc3e9ff0",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > .float-right",
+      "targets": [
+        ["css=a > .float-right", "css:finder"],
+        ["xpath=//img[@title='Go to Portal']", "xpath:img"],
+        ["xpath=//a/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "acda29b8-301b-4879-982b-68438ed66bbd",
+    "name": "Themes",
+    "commands": [{
+      "id": "dd9f7d5d-2c02-46d2-9b17-098b0035b092",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c9adc634-0479-41d1-8b56-d4d29b227af3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1364x766",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1e31f1b9-b4a7-4a10-8669-c1116f1d8d73",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=THEMES",
+      "targets": [
+        ["linkText=THEMES", "linkText"],
+        ["css=.icon-nav:nth-child(1) > .icon-nav__box", "css:finder"],
+        ["xpath=//div[@id='hero-icon-navs']/div/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/themes')])[11]", "xpath:href"],
+        ["xpath=//div[4]/div/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "deeb26b1-2381-4b15-a901-0de026d899d0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.subnav__icon-nav:nth-child(1) h2",
+      "targets": [
+        ["css=.subnav__icon-nav:nth-child(1) h2", "css:finder"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Transport')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f39710ed-6481-49d0-921f-7c4f51b84e69",
+      "comment": "",
+      "command": "click",
+      "target": "css=.subnav__icon-nav:nth-child(3) h2",
+      "targets": [
+        ["css=.subnav__icon-nav:nth-child(3) h2", "css:finder"],
+        ["xpath=//div[3]/a/div[2]/h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Housing')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "be78eea0-b9c3-42c5-a4cb-977718799d16",
+      "comment": "",
+      "command": "click",
+      "target": "css=.subnav__icon-nav:nth-child(4) use",
+      "targets": [
+        ["css=.subnav__icon-nav:nth-child(4) use", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "556c5e2a-b0ff-4e4f-ab65-b62ec0400e24",
+      "comment": "",
+      "command": "click",
+      "target": "css=.subnav__icon-nav:nth-child(5) use",
+      "targets": [
+        ["css=.subnav__icon-nav:nth-child(5) use", "css:finder"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "0b20133d-c2b2-4c1f-86ec-eacb0a82f3b0",
+    "name": "QueriesGeoDemos",
+    "commands": [{
+      "id": "2ac73422-9cdf-4d4d-8cb4-e1509889cf21",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8881ff70-3219-4a24-8c3e-1944d73e809e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1364x766",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "15ceb2d5-4b7f-4325-a22b-3e01455b85db",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=QUERIES",
+      "targets": [
+        ["linkText=QUERIES", "linkText"],
+        ["css=.icon-nav:nth-child(2) > .icon-nav__box", "css:finder"],
+        ["xpath=//div[@id='hero-icon-navs']/div[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/queries')])[6]", "xpath:href"],
+        ["xpath=//div[4]/div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'QUERIES')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "baa964a2-e156-432b-8b79-3cd7af4267e0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Launch Geodemographics",
+      "targets": [
+        ["linkText=Launch Geodemographics", "linkText"],
+        ["css=.is-selected a", "css:finder"],
+        ["xpath=//a[contains(text(),'Launch Geodemographics')]", "xpath:link"],
+        ["xpath=//div[@id='sub-home__carousel']/div/div/div/div/div/div[3]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, 'queries/geodemos')])[2]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Launch Geodemographics')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5509a79f-b5bc-4ac5-a506-60d217579a0a",
+    "name": "QueriesLiveTravel",
+    "commands": [{
+      "id": "27bcb594-fd83-4da9-a39b-1bf5c1b7d189",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "aa879657-08e7-4766-981c-80eae32147f4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1364x766",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "74f69916-0d60-4c30-b2ec-1e5fd053e736",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=QUERIES",
+      "targets": [
+        ["linkText=QUERIES", "linkText"],
+        ["css=.icon-nav:nth-child(2) > .icon-nav__box", "css:finder"],
+        ["xpath=//div[@id='hero-icon-navs']/div[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/queries')])[6]", "xpath:href"],
+        ["xpath=//div[4]/div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'QUERIES')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7063d15-0342-43a4-bad0-638455bb714b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Launch Live Travel",
+      "targets": [
+        ["linkText=Launch Live Travel", "linkText"],
+        ["css=.carousel-cell:nth-child(2) a", "css:finder"],
+        ["xpath=//a[contains(text(),'Launch Live Travel')]", "xpath:link"],
+        ["xpath=//div[@id='sub-home__carousel']/div/div/div/div[2]/div/div[3]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, 'queries/live-travel')])[2]", "xpath:href"],
+        ["xpath=//div[2]/div/div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Launch Live Travel')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "323db3d3-9868-4186-96d2-fd9b22a97e70",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-marker-icon:nth-child(7)",
+      "targets": [
+        ["css=.leaflet-marker-icon:nth-child(7)", "css:finder"],
+        ["xpath=(//img[@alt='Car Park icon'])[7]", "xpath:img"],
+        ["xpath=//div[@id='live-travel-map']/div/div[4]/img[7]", "xpath:idRelative"],
+        ["xpath=//div[4]/img[7]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "b1124c2f-e4b0-40de-bcb5-306068569128",
+    "name": "HomePageMap",
+    "commands": [{
+      "id": "3f6f7867-4bda-43e4-9caf-5305ee5ac212",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f1e31807-f83d-46a6-bf2b-13951d1c21f4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1364x766",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1835be74-6899-4dc9-91af-35eb5c036704",
+      "comment": "",
+      "command": "click",
+      "target": "css=#cork_county > path",
+      "targets": [
+        ["css=#cork_county > path", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "9502ea14-610e-4eff-bb91-25483a9a9935",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,1300)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c57364e5-e87e-4ba3-92d9-3a2ad0b2dfa1",
+      "comment": "",
+      "command": "click",
+      "target": "css=#cork_city > path",
+      "targets": [
+        ["css=#cork_city > path", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "7d4f16b7-f26f-4eb8-9dc9-cf0597d84e4b",
+      "comment": "",
+      "command": "click",
+      "target": "css=#cork_county > path",
+      "targets": [
+        ["css=#cork_county > path", "css:finder"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "7c0a9578-2ffa-453e-996e-30ed00a8488d",
+    "name": "Portal",
+    "commands": [{
+      "id": "887e087e-9d9a-4270-b63c-9d5c64e26d58",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c9dc43ac-348c-4ca5-99b2-9fd2c174a9b3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1364x766",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "93409784-e735-4fce-98db-9a68f8b38320",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > .float-right",
+      "targets": [
+        ["css=a > .float-right", "css:finder"],
+        ["xpath=//img[@title='Go to Portal']", "xpath:img"],
+        ["xpath=//a/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "916b9133-cc6a-44b1-bd35-54f267581e9c",
+    "name": "Tools",
+    "commands": [{
+      "id": "8d26cf56-be66-457a-a9fe-1c59faaeb576",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d0afa1fb-1459-4531-8353-3cd3ef43b063",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1364x766",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "190703dd-a2a1-4588-a97a-92cd65b81cb7",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=TOOLS",
+      "targets": [
+        ["linkText=TOOLS", "linkText"],
+        ["css=.icon-nav:nth-child(3) > .icon-nav__box", "css:finder"],
+        ["xpath=//div[@id='hero-icon-navs']/div[3]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/tools')])[2]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'TOOLS')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "414b3291-6761-4275-a641-d6d525798a37",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["f1f9be0f-9331-49ba-81e0-f2ef35c92b41", "b1124c2f-e4b0-40de-bcb5-306068569128", "7c0a9578-2ffa-453e-996e-30ed00a8488d", "0b20133d-c2b2-4c1f-86ec-eacb0a82f3b0", "5509a79f-b5bc-4ac5-a506-60d217579a0a", "acda29b8-301b-4879-982b-68438ed66bbd", "916b9133-cc6a-44b1-bd35-54f267581e9c"]
+  }],
+  "urls": ["http://localhost:3000/"],
+  "plugins": []
+}
